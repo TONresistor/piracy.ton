@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>piracy.ton</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <a href="/" class="logo">piracy.ton</a>
+        <div class="header-right">
+            <button class="theme-toggle" id="theme-toggle" title="Toggle dark mode">
+                <svg id="icon-moon" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
+                <svg id="icon-sun" style="display:none" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 0 0 0-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/></svg>
+            </button>
+            <a href="/add.html" data-i18n="add_bag">+ Add Bag</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="bag-detail" id="bag-detail">
+            <div class="bag-header">
+                <span class="bag-category" id="bag-category"></span>
+                <h1 id="bag-name"></h1>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-value" id="bag-size">-</span>
+                    <span class="stat-label" data-i18n="th_size">Size</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="bag-files-count">-</span>
+                    <span class="stat-label" data-i18n="th_files">Files</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="bag-peers">-</span>
+                    <span class="stat-label" data-i18n="th_peers">Peers</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="bag-date">-</span>
+                    <span class="stat-label" data-i18n="th_date">Date</span>
+                </div>
+            </div>
+
+            <div class="uploader-section">
+                <span class="info-label" data-i18n="detail_uploader">Uploader</span>
+                <span class="uploader-value" id="bag-uploader">-</span>
+            </div>
+
+            <div class="bag-id-section">
+                <span class="info-label" data-i18n="th_bagid">Bag ID</span>
+                <div class="bag-id-row">
+                    <code id="bag-id"></code>
+                    <button class="copy-btn" id="copy-btn" title="Copy">
+                        <svg viewBox="0 0 24 24" width="16" height="16"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="files-section">
+                <h2 data-i18n="detail_files">Files</h2>
+                <div class="files-list" id="files-list">
+                    <p class="loading" data-i18n="fetching_info">Loading...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bag-not-found" id="bag-not-found" style="display: none;">
+            <p data-i18n="bag_not_found">Bag not found</p>
+            <a href="/" data-i18n="back_home">Back to home</a>
+        </div>
+    </main>
+
+    <footer>
+        <span data-i18n="footer">TON Storage Indexer</span>
+        <a href="https://docs.resistance.dog" target="_blank" data-i18n="docs">Documentation</a>
+    </footer>
+
+    <script src="js/i18n.js"></script>
+    <script src="js/bag.js"></script>
+</body>
+</html>

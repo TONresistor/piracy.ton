@@ -1,0 +1,16 @@
+{
+    "$schema": "http://raw.githubusercontent.com/tact-lang/tact/main/src/config/configSchema.json",
+    "projects": [
+        {
+            "name": "BagRegistry",
+            "path": "./BagRegistry.tact",
+            "output": "./build",
+            "options": {
+                "debug": false,
+                "external": false,
+                "ipfsAbiGetter": false,
+                "interfacesGetter": false
+            }
+        }
+    ]
+}
