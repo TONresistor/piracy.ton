@@ -28,23 +28,7 @@ The files themselves live on TON Storage, a peer-to-peer network similar to BitT
 
 **Permissionless** - Anyone can register a bag. No account needed, no approval process. Connect a wallet, pay ~0.015 TON in gas, and your bag is indexed permanently.
 
-### Why not just use The Pirate Bay?
-
-The Pirate Bay has been seized, blocked, and its operators arrested - repeatedly. But BitTorrent itself was never the problem. Torrents are decentralized. The problem was always the **index**: the website and database that told you what torrents exist. That was centralized, and that's what got taken down.
-
-piracy.ton solves this by putting the index on blockchain:
-
-| Aspect | The Pirate Bay | piracy.ton |
-|--------|----------------|------------|
-| **Index Storage** | Centralized servers | TON Blockchain (immutable) |
-| **File Storage** | BitTorrent DHT | TON Storage (blockchain-backed P2P) |
-| **Domain** | Traditional DNS (seizeable) | .ton domain (decentralized DNS) |
-| **Takedown** | Servers can be seized | No server to seize |
-| **Admin Control** | Site operators can be arrested | No owner, no admin, no control |
-| **Censorship** | Domain blocks, ISP filtering | Requires blocking entire TON network |
-| **Single Point of Failure** | Yes (website, database) | None |
-
-Once deployed, the contract runs autonomously. No one can stop it.
+The problem with torrent indexes has always been centralization - servers get seized, domains get blocked, operators get arrested. piracy.ton solves this by putting the index on blockchain, making it truly unstoppable.
 
 ## Smart Contract
 
