@@ -14,7 +14,7 @@ let currentLang = 'en';
 
 async function loadTranslations(lang) {
     try {
-        const res = await fetch(`/lang/${lang}.json`);
+        const res = await fetch(`/lang/${lang}.json?v=2`);
         if (res.ok) {
             translations = await res.json();
             currentLang = lang;
@@ -65,9 +65,7 @@ function updateLangSelector() {
 
 function initLang() {
     const saved = localStorage.getItem('lang');
-    const browserLang = navigator.language.split('-')[0];
-    const lang = saved || (LANGS.includes(browserLang) ? browserLang : 'en');
-    loadTranslations(lang);
+    loadTranslations(saved || 'en');
 }
 
 function createLangSelector() {

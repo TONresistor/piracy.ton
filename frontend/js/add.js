@@ -1,4 +1,3 @@
-// Theme toggle
 function initTheme() {
     const saved = localStorage.getItem('theme');
     if (saved === 'dark') {
@@ -35,6 +34,7 @@ const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
 });
 
 let currentWallet = null;
+let currentBagMetadata = null;  // Store fetched metadata
 
 tonConnectUI.onStatusChange(wallet => {
     currentWallet = wallet;
@@ -49,9 +49,13 @@ tonConnectUI.onStatusChange(wallet => {
     }
 });
 
+// Fetch bag metadata from TON Storage
 document.getElementById('bag-id').addEventListener('blur', async (e) => {
-    const bagId = e.target.value.trim();
-    if (!/^[a-fA-F0-9]{64}$/.test(bagId)) return;
+    const bagId = e.target.value.trim().toLowerCase();
+    if (!/^[a-fA-F0-9]{64}$/.test(bagId)) {
+        currentBagMetadata = null;
+        return;
+    }
 
     const status = document.getElementById('upload-status');
     status.textContent = 'Fetching bag info...';
@@ -60,16 +64,33 @@ document.getElementById('bag-id').addEventListener('blur', async (e) => {
         const res = await fetch(`/api/bag-info/${bagId}`);
         if (res.ok) {
             const info = await res.json();
+            
+            // Store full metadata for later use
+            currentBagMetadata = {
+                description: info.description || '',
+                bagSize: info.size_bytes || 0,
+                filesCount: info.files_count || 0,
+                pieceSize: info.piece_size || 131072,
+                merkleHash: info.merkle_hash || '0',
+                dirName: info.dir_name || ''
+            };
+            
+            // Auto-fill name if empty
             const nameInput = document.getElementById('bag-name');
             if (!nameInput.value && info.description) {
                 nameInput.value = info.description;
             }
-            status.textContent = `${info.files_count} files, ${info.size}, ${info.peers_count} peers`;
+            
+            // Show info to user
+            const sizeStr = info.size || 'Unknown size';
+            status.textContent = `${info.files_count} files, ${sizeStr}, ${info.peers_count} peers`;
         } else {
-            status.textContent = 'Bag not found in TON Storage (will still work)';
+            currentBagMetadata = null;
+            status.textContent = 'Bag not found in TON Storage (will still work with defaults)';
         }
     } catch (err) {
-        status.textContent = '';
+        currentBagMetadata = null;
+        status.textContent = 'Could not fetch bag info';
     }
 });
 
@@ -104,9 +125,21 @@ document.getElementById('upload-form').addEventListener('submit', async (e) => {
     status.textContent = 'Building transaction...';
 
     try {
-        // Build AddBag message payload
-        const payload = await ContractHelper.buildAddBagPayload(bagId, name, category);
-        console.log('Payload:', payload);
+        // Build payload with all metadata
+        const payload = await ContractHelper.buildAddBagPayload({
+            bagId: bagId,
+            name: name,
+            category: category,
+            description: currentBagMetadata?.description || name,
+            bagSize: currentBagMetadata?.bagSize || 0,
+            filesCount: currentBagMetadata?.filesCount || 0,
+            files: null,  // Empty cell (actual files dict too complex for frontend)
+            pieceSize: currentBagMetadata?.pieceSize || 131072,
+            merkleHash: currentBagMetadata?.merkleHash || '0',
+            dirName: currentBagMetadata?.dirName || ''
+        });
+        
+        console.log('Payload built successfully');
 
         const transaction = {
             validUntil: Math.floor(Date.now() / 1000) + 600,
@@ -122,11 +155,9 @@ document.getElementById('upload-form').addEventListener('submit', async (e) => {
         const result = await tonConnectUI.sendTransaction(transaction);
 
         status.textContent = 'Transaction sent! Bag added to blockchain.';
-
-        // Clear form
+        currentBagMetadata = null;
         document.getElementById('upload-form').reset();
 
-        // Redirect after delay
         setTimeout(() => {
             window.location.href = '/';
         }, 2000);

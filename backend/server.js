@@ -17,9 +17,13 @@ async function getBagInfo(bagId, includeFiles = false) {
             const data = await res.json();
             const info = {
                 description: data.description || null,
-                size: data.size || null,
+                size: data.size || data.bag_size || null,
+                bag_size: data.bag_size || data.size || null,
                 files_count: data.files_count || 0,
-                peers_count: data.peers ? data.peers.length : 0
+                peers_count: data.peers ? data.peers.length : 0,
+                piece_size: data.piece_size || 131072,
+                merkle_hash: data.merkle_hash || null,
+                dir_name: data.dir_name || ''
             };
             if (includeFiles && data.files) {
                 info.files = data.files;
@@ -93,6 +97,7 @@ app.get('/api/bags/:id', (req, res) => {
 });
 
 // GET /api/bag-info/:bagId - Récupère les infos d'un bag depuis TON Storage
+// Returns all metadata needed for contract registration
 app.get('/api/bag-info/:bagId', async (req, res) => {
     const { bagId } = req.params;
 
@@ -106,52 +111,19 @@ app.get('/api/bag-info/:bagId', async (req, res) => {
     }
 
     res.json({
+        // Display info
         description: info.description,
         size: formatSize(info.size),
         size_bytes: info.size,
         files_count: info.files_count,
         peers_count: info.peers_count,
-        files: info.files || []
+        files: info.files || [],
+        // Contract metadata
+        bag_size: info.bag_size,
+        piece_size: info.piece_size,
+        merkle_hash: info.merkle_hash,
+        dir_name: info.dir_name
     });
-});
-
-// POST /api/bags - Ajouter un bag (paywall 0.1 TON)
-app.post('/api/bags', async (req, res) => {
-    const { bag_id, name, category, wallet_address, tx_boc } = req.body;
-
-    if (!bag_id || !name || !category || !wallet_address) {
-        return res.status(400).json({ error: 'Missing required fields' });
-    }
-
-    if (!tx_boc) {
-        return res.status(402).json({ error: 'Payment required' });
-    }
-
-    // Validate bag_id format (64 hex chars)
-    if (!/^[a-fA-F0-9]{64}$/.test(bag_id)) {
-        return res.status(400).json({ error: 'Invalid bag_id format' });
-    }
-
-    // Fetch info from TON Storage automatically
-    const bagInfo = await getBagInfo(bag_id);
-    const size = bagInfo ? formatSize(bagInfo.size) : null;
-    const files_count = bagInfo ? bagInfo.files_count : null;
-    const peers_count = bagInfo ? bagInfo.peers_count : null;
-
-    try {
-        const stmt = db.prepare(`
-            INSERT INTO bags (bag_id, name, category, size, files_count, peers_count, uploader_wallet, tx_boc)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-        `);
-        const result = stmt.run(bag_id, name, category, size, files_count, peers_count, wallet_address, tx_boc);
-        res.json({ success: true, id: result.lastInsertRowid, size, files_count, peers_count });
-    } catch (err) {
-        if (err.code === 'SQLITE_CONSTRAINT_UNIQUE') {
-            return res.status(409).json({ error: 'Bag ID already exists' });
-        }
-        console.error(err);
-        res.status(500).json({ error: 'Database error' });
-    }
 });
 
 // GET /api/sync - Trigger manual sync from contract

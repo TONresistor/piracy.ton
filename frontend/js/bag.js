@@ -74,13 +74,12 @@ function renderBag(db, storage) {
     document.getElementById('bag-date').textContent = formatDate(db.created_at);
     const uploaderEl = document.getElementById('bag-uploader');
     if (db.uploader_wallet) {
-        uploaderEl.innerHTML = `<a href="https://tonviewer.com/${db.uploader_wallet}" target="_blank">${db.uploader_wallet}</a>`;
+        uploaderEl.innerHTML = `<a href="https://tonviewer.com/${encodeURIComponent(db.uploader_wallet)}" target="_blank">${escapeHtml(db.uploader_wallet)}</a>`;
     } else {
         uploaderEl.textContent = '-';
     }
     document.getElementById('bag-id').textContent = db.bag_id;
 
-    // Render files list
     const filesList = document.getElementById('files-list');
     if (storage?.files && storage.files.length > 0) {
         filesList.innerHTML = storage.files.map(f => `
@@ -94,7 +93,6 @@ function renderBag(db, storage) {
         if (window.applyTranslations) window.applyTranslations();
     }
 
-    // Copy button
     document.getElementById('copy-btn').addEventListener('click', () => {
         navigator.clipboard.writeText(db.bag_id);
         const btn = document.getElementById('copy-btn');
@@ -109,7 +107,6 @@ function escapeHtml(str) {
     return div.innerHTML;
 }
 
-// Theme toggle
 const themeToggle = document.getElementById('theme-toggle');
 const iconMoon = document.getElementById('icon-moon');
 const iconSun = document.getElementById('icon-sun');

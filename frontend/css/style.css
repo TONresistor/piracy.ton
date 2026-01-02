@@ -52,7 +52,6 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Header */
 header {
     display: flex;
     justify-content: space-between;
@@ -69,6 +68,19 @@ header {
     font-size: 20px;
     font-weight: 600;
     color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+    filter: drop-shadow(1px 0 0 #000) drop-shadow(-1px 0 0 #000) drop-shadow(0 1px 0 #000) drop-shadow(0 -1px 0 #000);
+}
+
+[data-theme="dark"] .logo-img {
+    filter: none;
 }
 
 .logo:visited {
@@ -95,7 +107,6 @@ header {
     gap: 12px;
 }
 
-/* Theme Toggle */
 .theme-toggle {
     background: none;
     border: none;
@@ -123,7 +134,6 @@ header {
     fill: var(--text-primary);
 }
 
-/* Language Selector */
 .lang-selector {
     background: var(--bg-white);
     border: 1px solid var(--border-color);
@@ -139,7 +149,6 @@ header {
     border-color: var(--ton-blue);
 }
 
-/* RTL Support */
 [dir="rtl"] {
     direction: rtl;
 }
@@ -152,7 +161,6 @@ header {
     flex-direction: row-reverse;
 }
 
-/* Main */
 main {
     flex: 1;
     padding: 20px 12px;
@@ -161,11 +169,35 @@ main {
     width: 100%;
 }
 
-/* Search */
+.hero {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.hero-img {
+    height: 120px;
+    width: auto;
+    filter: drop-shadow(1px 0 0 #000) drop-shadow(-1px 0 0 #000) drop-shadow(0 1px 0 #000) drop-shadow(0 -1px 0 #000);
+}
+
+[data-theme="dark"] .hero-img {
+    filter: none;
+}
+
+.hero-title {
+    margin-top: 16px;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+
 .search-box {
     margin-bottom: 16px;
     display: flex;
     gap: 10px;
+    justify-content: center;
 }
 
 .search-box input {
@@ -203,7 +235,6 @@ main {
     background: var(--ton-blue-hover);
 }
 
-/* Categories Pills */
 .categories {
     display: flex;
     gap: 8px;
@@ -212,6 +243,7 @@ main {
     padding-bottom: 8px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    justify-content: center;
 }
 
 .categories::-webkit-scrollbar {
@@ -229,6 +261,14 @@ main {
     color: var(--text-secondary);
     transition: all 0.2s ease;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.cat-icon {
+    width: 16px;
+    height: 16px;
 }
 
 .categories label:hover {
@@ -250,7 +290,6 @@ main {
     box-shadow: 0 2px 8px rgba(0, 152, 234, 0.3);
 }
 
-/* Table */
 .table-wrapper {
     background: var(--bg-white);
     border-radius: var(--radius-md);
@@ -296,6 +335,12 @@ tr.clickable-row:hover td {
     font-size: 18px;
 }
 
+.type-svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--text-secondary);
+}
+
 .bag-name {
     font-weight: 500;
     color: var(--text-primary);
@@ -328,7 +373,6 @@ tr.clickable-row:hover td {
     fill: var(--ton-blue);
 }
 
-/* Footer */
 footer {
     display: flex;
     justify-content: space-between;
@@ -347,7 +391,6 @@ footer a:hover {
     color: var(--ton-blue);
 }
 
-/* Add page */
 main h2 {
     font-size: 20px;
     font-weight: 600;
@@ -426,7 +469,6 @@ main h2 {
     color: var(--text-secondary);
 }
 
-/* Bag Detail Page */
 .bag-detail {
     max-width: 800px;
 }
@@ -613,6 +655,39 @@ main h2 {
     padding: 20px;
 }
 
+.faq-container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.faq-title {
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.faq-item {
+    background: var(--bg-white);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.faq-item h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.faq-item p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
 .bag-not-found {
     text-align: center;
     padding: 60px 20px;
@@ -624,7 +699,6 @@ main h2 {
     font-size: 16px;
 }
 
-/* Mobile */
 @media (max-width: 768px) {
     header {
         padding: 12px 16px;
@@ -665,11 +739,18 @@ main h2 {
         font-size: 13px;
     }
 
-    /* Hide: Files, Peers, Date */
     th:nth-child(4), td:nth-child(4),
     th:nth-child(5), td:nth-child(5),
     th:nth-child(6), td:nth-child(6) {
         display: none;
+    }
+
+    .bag-name {
+        display: block;
+        max-width: 180px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .bag-id code {

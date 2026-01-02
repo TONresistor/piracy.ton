@@ -37,5 +37,19 @@
   "detail_uploader": "Uploader",
   "detail_files": "Files",
   "no_files": "No files available",
-  "back_home": "Back to home"
+  "back_home": "Back to home",
+  "hero_title": "Decentralized TON Storage Files Indexer",
+  "faq_title": "F.A.Q",
+  "faq_q1": "What is piracy.ton?",
+  "faq_a1": "A decentralized file indexer built on TON Storage. We don't host any files — we only index Bag IDs shared by the community.",
+  "faq_q2": "What is a Bag ID?",
+  "faq_a2": "A unique 64-character hexadecimal identifier that points to a collection of files stored on the TON Storage network.",
+  "faq_q3": "How do I download files?",
+  "faq_a3": "Copy the Bag ID and open it with a TON Storage client like",
+  "faq_q4": "How do I add a bag?",
+  "faq_a4": "Click \"+ Add Bag\", connect your TON wallet, enter the Bag ID, name, category, and pay 0.1 TON to submit.",
+  "faq_q5": "Why 0.1 TON to add?",
+  "faq_a5": "A small fee to prevent spam and cover network costs. Your wallet address is saved as the uploader.",
+  "faq_q6": "How to access via TON network?",
+  "faq_a6": "Use a TON-compatible browser or proxy to access piracy.ton directly on the TON network."
 }

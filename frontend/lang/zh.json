@@ -37,5 +37,19 @@
   "detail_uploader": "上传者",
   "detail_files": "文件列表",
   "no_files": "暂无文件",
-  "back_home": "返回首页"
+  "back_home": "返回首页",
+  "hero_title": "去中心化 TON Storage 文件索引器",
+  "faq_title": "常见问题",
+  "faq_q1": "什么是 piracy.ton？",
+  "faq_a1": "基于 TON Storage 构建的去中心化文件索引器。我们不托管任何文件——只索引社区分享的 Bag ID。",
+  "faq_q2": "什么是 Bag ID？",
+  "faq_a2": "一个唯一的64位十六进制标识符，指向存储在 TON Storage 网络上的文件集合。",
+  "faq_q3": "如何下载文件？",
+  "faq_a3": "复制 Bag ID 并使用 TON Storage 客户端打开，例如",
+  "faq_q4": "如何添加 bag？",
+  "faq_a4": "点击\"+ 添加\"，连接 TON 钱包，输入 Bag ID、名称、分类，支付 0.1 TON 即可提交。",
+  "faq_q5": "为什么添加需要 0.1 TON？",
+  "faq_a5": "少量费用用于防止垃圾信息和支付网络成本。您的钱包地址将被保存为上传者。",
+  "faq_q6": "如何通过 TON 网络访问？",
+  "faq_a6": "使用兼容 TON 的浏览器或代理直接在 TON 网络上访问 piracy.ton。"
 }

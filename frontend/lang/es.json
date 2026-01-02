@@ -37,5 +37,19 @@
   "detail_uploader": "Subido por",
   "detail_files": "Archivos",
   "no_files": "Sin archivos disponibles",
-  "back_home": "Volver al inicio"
+  "back_home": "Volver al inicio",
+  "hero_title": "Indexador descentralizado de archivos TON Storage",
+  "faq_title": "F.A.Q",
+  "faq_q1": "¿Qué es piracy.ton?",
+  "faq_a1": "Un indexador de archivos descentralizado basado en TON Storage. No alojamos archivos — solo indexamos Bag IDs compartidos por la comunidad.",
+  "faq_q2": "¿Qué es un Bag ID?",
+  "faq_a2": "Un identificador hexadecimal único de 64 caracteres que apunta a una colección de archivos almacenados en la red TON Storage.",
+  "faq_q3": "¿Cómo descargo archivos?",
+  "faq_a3": "Copia el Bag ID y ábrelo con un cliente TON Storage como",
+  "faq_q4": "¿Cómo añado un bag?",
+  "faq_a4": "Haz clic en \"+ Añadir\", conecta tu wallet TON, ingresa el Bag ID, nombre, categoría y paga 0.1 TON.",
+  "faq_q5": "¿Por qué 0.1 TON para añadir?",
+  "faq_a5": "Una pequeña tarifa para prevenir spam y cubrir costos de red. Tu dirección de wallet se guarda como uploader.",
+  "faq_q6": "¿Cómo acceder vía red TON?",
+  "faq_a6": "Usa un navegador compatible con TON o un proxy para acceder a piracy.ton directamente en la red TON."
 }
