@@ -16,7 +16,23 @@
 
 ## About
 
-A decentralized, censorship-resistant index for [TON Storage](https://docs.ton.org/develop/dapps/ton-storage). Inspired by The Pirate Bay, built for Web3.
+piracy.ton is a registry for [TON Storage](https://docs.ton.org/develop/dapps/ton-storage) bags. Think of it as a torrent index, but stored entirely on blockchain.
+
+The files themselves live on TON Storage, a peer-to-peer network similar to BitTorrent. The index - the registry of what bags exist, their names, sizes, and hashes - lives on the TON blockchain as a smart contract. The frontend is hosted on a .ton domain. There is no central server anywhere in the stack.
+
+**Decentralized** - The index is replicated across every node in the TON network. There is no server to take down.
+
+**Censorship-resistant** - Data stored on blockchain is immutable. Once a bag is registered, it cannot be deleted or modified by anyone.
+
+**Trustless** - The smart contract has no owner and no admin. No one has special privileges. It runs autonomously according to its code.
+
+**Permissionless** - Anyone can register a bag. No account needed, no approval process. Connect a wallet, pay ~0.015 TON in gas, and your bag is indexed permanently.
+
+### Why not just use The Pirate Bay?
+
+The Pirate Bay has been seized, blocked, and its operators arrested - repeatedly. But BitTorrent itself was never the problem. Torrents are decentralized. The problem was always the **index**: the website and database that told you what torrents exist. That was centralized, and that's what got taken down.
+
+piracy.ton solves this by putting the index on blockchain:
 
 | Aspect | The Pirate Bay | piracy.ton |
 |--------|----------------|------------|
@@ -34,22 +50,7 @@ Once deployed, the contract runs autonomously. No one can stop it.
 
 ### Architecture
 
-Master-Item pattern (like NFT Collections):
-
-```
-┌─────────────────┐
-│   BagRegistry   │  Master - deploys children
-└────────┬────────┘
-         │
-    ┌────┴────┬────────┬────────┐
-    ▼         ▼        ▼        ▼
-┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐
-│BagItem│ │BagItem│ │BagItem│ │  ...  │
-│  #0   │ │  #1   │ │  #2   │ │       │
-└───────┘ └───────┘ └───────┘ └───────┘
-```
-
-Each bag has its own contract. Unlimited scalability.
+The contract uses the Master-Item pattern, similar to NFT Collections on TON. A single BagRegistry contract (master) deploys a new BagItem contract (child) for each registered bag. Each bag has its own contract address, enabling unlimited scalability without dictionary size limits.
 
 ### Features
 
