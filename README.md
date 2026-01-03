@@ -66,6 +66,43 @@ piece_size: uint32, merkle_hash: uint256, dir_name: cell
 
 **DeactivateBag (0x00000010)** - Deactivate a bag (sent to BagItem, uploader only)
 
+### Storage Layout
+
+Data stored on-chain in smart contracts.
+
+**BagRegistry (Master)**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `nextBagIndex` | uint64 | Index counter for next bag |
+| `bagItemCode` | cell | Compiled BagItem contract code |
+
+**BagItem (Child)**
+
+| Field | Type | Bits | Description |
+|-------|------|------|-------------|
+| `bagIndex` | uint64 | 64 | Sequential index in registry |
+| `registryAddress` | address | 267 | Parent registry address |
+| `bagId` | uint256 | 256 | TON Storage bag hash |
+| `name` | cell | ref | Bag name (Snake format) |
+| `category` | uint8 | 8 | Category ID (0-5) |
+| `uploaderAddress` | address | 267 | Wallet that registered the bag |
+| `timestamp` | uint64 | 64 | Registration time (Unix) |
+| `isActive` | bool | 1 | Active status |
+| `metadata` | cell | ref | TON Storage metadata (see below) |
+
+**BagStorageMetadata** (ref cell in BagItem)
+
+| Field | Type | Bits | Description |
+|-------|------|------|-------------|
+| `description` | cell | ref | Bag description (Snake format) |
+| `bagSize` | uint64 | 64 | Total size in bytes |
+| `filesCount` | uint32 | 32 | Number of files |
+| `files` | cell | ref | Dict: index → (name, size) |
+| `pieceSize` | uint32 | 32 | Piece size for transfers |
+| `merkleHash` | uint256 | 256 | Merkle root for verification |
+| `dirName` | cell | ref | Root directory name |
+
 ### Getters
 
 **BagRegistry:**
