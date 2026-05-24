@@ -237,13 +237,13 @@ main {
 
 .categories {
     display: flex;
-    gap: 8px;
+    gap: 6px;
     margin-bottom: 20px;
     overflow-x: auto;
-    padding-bottom: 8px;
+    padding: 4px 4px 12px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .categories::-webkit-scrollbar {
@@ -252,42 +252,42 @@ main {
 
 .categories label {
     flex-shrink: 0;
-    padding: 10px 18px;
-    background: var(--bg-white);
+    padding: 7px 14px;
+    background: transparent;
     border-radius: var(--radius-pill);
     cursor: pointer;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--text-secondary);
-    transition: all 0.2s ease;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-    display: flex;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
+    line-height: 1.2;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .cat-icon {
-    width: 16px;
-    height: 16px;
+    width: 15px;
+    height: 15px;
 }
 
 .categories label:hover {
-    background: var(--border-color);
+    background: var(--bg-secondary);
 }
 
 .categories input[type="radio"] {
     display: none;
 }
 
-.categories input[type="radio"]:checked + span {
+.categories label:has(input:checked) {
     background: var(--ton-blue);
     color: #fff;
 }
 
-.categories label:has(input:checked) {
-    background: var(--ton-blue);
-    color: #fff;
-    box-shadow: 0 2px 8px rgba(0, 152, 234, 0.3);
+.categories label:has(input:checked):hover {
+    background: var(--ton-blue-hover, var(--ton-blue));
 }
 
 .table-wrapper {
