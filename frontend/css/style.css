@@ -237,44 +237,53 @@ main {
 
 .categories {
     display: flex;
-    gap: 6px;
+    justify-content: center;
     margin-bottom: 20px;
-    overflow-x: auto;
     padding: 4px 4px 12px;
+    overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    justify-content: center;
 }
 
 .categories::-webkit-scrollbar {
     display: none;
 }
 
-.categories label {
-    flex-shrink: 0;
-    padding: 7px 14px;
-    background: transparent;
-    border-radius: var(--radius-pill);
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-secondary);
-    transition: background-color 0.15s ease, color 0.15s ease;
+.categories-pill {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    line-height: 1.2;
+    padding: 3px;
+    border-radius: 296px;
+    background: rgba(255, 255, 255, 0.65);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+[data-theme="dark"] .categories-pill {
+    background: rgba(35, 46, 60, 0.65);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+}
+
+.categories label {
+    flex-shrink: 0;
+    height: 35px;
+    padding: 0 18px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 510;
+    line-height: 18px;
+    letter-spacing: -0.08px;
+    color: var(--text-primary);
+    background: transparent;
+    transition: background-color 0.15s ease;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
-}
-
-.cat-icon {
-    width: 15px;
-    height: 15px;
-}
-
-.categories label:hover {
-    background: var(--bg-secondary);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
 }
 
 .categories input[type="radio"] {
@@ -282,12 +291,11 @@ main {
 }
 
 .categories label:has(input:checked) {
-    background: var(--ton-blue);
-    color: #fff;
+    background: #ededed;
 }
 
-.categories label:has(input:checked):hover {
-    background: var(--ton-blue-hover, var(--ton-blue));
+[data-theme="dark"] .categories label:has(input:checked) {
+    background: rgba(255, 255, 255, 0.12);
 }
 
 .table-wrapper {
