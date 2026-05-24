@@ -8,7 +8,7 @@ import "@wrappers/BagRegistry.gen"
 const REGISTRY_DEPLOY_VALUE: coins = ton("0.1")
 
 fun main() {
-    val deployer = scripts.wallet("deployer");
+    val deployer = scripts.wallet("piracy-deployer");
 
     val registry = BagRegistry.fromStorage({ nextBagIndex: 0 });
 

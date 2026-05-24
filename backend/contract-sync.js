@@ -2,7 +2,7 @@
 import { TonClient, Address } from '@ton/ton';
 import db from './db.js';
 
-const CONTRACT_ADDRESS = 'EQCLM6BxxUbWnuLCGzIXdADeMRduf4z4P-WoJe-nNhASSs9S';
+const CONTRACT_ADDRESS = 'EQBWQyOuZimuWhx5w0lOvPnfXYZLzICzV_EL7rWBLRQVPI9g';
 
 const ENDPOINT = process.env.TON_ENDPOINT || 'https://toncenter.com/api/v2/jsonRPC';
 const API_KEY = process.env.TONCENTER_MAINNET_API_KEY || process.env.TON_API_KEY;

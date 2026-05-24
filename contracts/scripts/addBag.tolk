@@ -16,7 +16,7 @@ fun main(registryAddr: address, bagId: int, category: int) {
     assert (bagId != 0) throw 257;
     assert (category >= 0 && category <= 5) throw 258;
 
-    val sender = scripts.wallet("deployer");
+    val sender = scripts.wallet("piracy-deployer");
     val registry = BagRegistry.fromAddress(registryAddr);
 
     val name: cell = textCell(0xBADC0DE);

@@ -175,7 +175,7 @@ User exit codes in the 256..399 range. Unknown opcodes throw the standard `0xFFF
 |---|---|
 | Website | [piracy.ton](https://piracy.ton) (requires TON Proxy) |
 | Contract (v1, deprecated) | [`EQCLM6BxxUbWnuLCGzIXdADeMRduf4z4P-WoJe-nNhASSs9S`](https://tonviewer.com/EQCLM6BxxUbWnuLCGzIXdADeMRduf4z4P-WoJe-nNhASSs9S), frozen at git tag `v1.0.0` |
-| Contract (v2) | Pending redeploy. v2 has a different code hash, so the address changes. Run `acton script scripts/deployRegistry.tolk --net mainnet` and update this field. |
+| Contract (v2) | [`EQBWQyOuZimuWhx5w0lOvPnfXYZLzICzV_EL7rWBLRQVPI9g`](https://tonviewer.com/EQBWQyOuZimuWhx5w0lOvPnfXYZLzICzV_EL7rWBLRQVPI9g), sources verified ([verifier.ton.org](https://verifier.ton.org/UQBWQyOuZimuWhx5w0lOvPnfXYZLzICzV_EL7rWBLRQVPNKl)) |
 
 ## Frontend / Backend
 
