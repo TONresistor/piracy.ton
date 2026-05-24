@@ -19,7 +19,7 @@ async function getBagInfo(bagId, includeFiles = false) {
                 size: data.size || data.bag_size || null,
                 bag_size: data.bag_size || data.size || null,
                 files_count: data.files_count || 0,
-                peers_count: data.peers ? data.peers.length : 0,
+                peers_count: (data.peers ? data.peers.length : 0) + (data.seeding && data.active ? 1 : 0),
                 piece_size: data.piece_size || 131072,
                 merkle_hash: data.merkle_hash || null,
                 dir_name: data.dir_name || ''
@@ -59,7 +59,9 @@ async function fetchPeersCount(bagId) {
         clearTimeout(t);
         if (!res.ok) return null;
         const data = await res.json();
-        const value = data.peers ? data.peers.length : 0;
+        const remotes = data.peers ? data.peers.length : 0;
+        const self = data.seeding && data.active ? 1 : 0;
+        const value = remotes + self;
         peersCache.set(bagId, { value, at: Date.now() });
         return value;
     } catch {
