@@ -28,7 +28,6 @@ function toggleTheme() {
 document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
 initTheme();
 
-// Format bytes to human readable
 function formatSize(bytes) {
     if (!bytes || bytes === 0) return '-';
     const units = ['B', 'KB', 'MB', 'GB', 'TB'];
@@ -96,7 +95,7 @@ function renderBags(bags) {
     });
 
     if (bags.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #708499; padding: 40px;">No bags found</td></tr>';
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #708499; padding: 40px;">${t('no_bags')}</td></tr>`;
     }
 }
 

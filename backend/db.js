@@ -10,16 +10,13 @@ db.exec(`
         category TEXT NOT NULL,
         size TEXT,
         files_count INTEGER,
-        peers_count INTEGER,
         uploader_wallet TEXT NOT NULL,
-        tx_boc TEXT,
+        contract_index INTEGER,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
 `);
 
-// Add columns if they don't exist (migration)
 try { db.exec(`ALTER TABLE bags ADD COLUMN files_count INTEGER`); } catch {}
-try { db.exec(`ALTER TABLE bags ADD COLUMN peers_count INTEGER`); } catch {}
 try { db.exec(`ALTER TABLE bags ADD COLUMN contract_index INTEGER`); } catch {}
 
 db.exec(`CREATE INDEX IF NOT EXISTS idx_bags_name ON bags(name)`);

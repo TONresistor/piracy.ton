@@ -8,7 +8,8 @@
         "strict": true,
         "skipLibCheck": true,
         "resolveJsonModule": true,
+        "declaration": true,
         "outDir": "./dist"
     },
-    "include": ["wrappers/**/*", "scripts/**/*", "tests/**/*"]
+    "include": ["wrappers-ts/**/*"]
 }

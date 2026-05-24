@@ -1,40 +1,23 @@
-// Storage definitions for BagRegistry and BagItem
-
-// ============================================
-// BAG REGISTRY STORAGE (Master)
-// Fully decentralized - no owner
-// ============================================
+import "messages.tolk"
 
 struct BagRegistryStorage {
-    nextBagIndex: uint64
-    bagItemCode: cell
+    nextBagIndex: uint64 = 0
 }
 
 fun BagRegistryStorage.load(): BagRegistryStorage {
-    return BagRegistryStorage.fromCell(contract.getData())
+    return BagRegistryStorage.fromCell(contract.getData());
 }
 
 fun BagRegistryStorage.save(self) {
-    contract.setData(self.toCell())
+    contract.setData(self.toCell());
 }
 
-// ============================================
-// BAG ITEM STORAGE (Child)
-// ============================================
-
-// TON Storage metadata (stored as ref cell)
-struct BagStorageMetadata {
-    description: cell       // Description du bag
-    bagSize: uint64         // Taille totale en bytes
-    filesCount: uint32      // Nombre de fichiers
-    files: cell             // Dict des fichiers {index -> (name, size)}
-    pieceSize: uint32       // Taille d'un piece
-    merkleHash: uint256     // Hash merkle pour vérification
-    dirName: cell           // Nom du dossier racine
+struct BagItemDataNotInitialized {
+    bagIndex: uint64
+    registryAddress: address
 }
 
-// Initialized storage
-struct BagItemStorage {
+struct BagItemDataInitialized {
     bagIndex: uint64
     registryAddress: address
     bagId: uint256
@@ -43,57 +26,28 @@ struct BagItemStorage {
     uploaderAddress: address
     timestamp: uint64
     isActive: bool
-    metadata: Cell<BagStorageMetadata>  // TON Storage metadata as ref
+    metadata: Cell<BagMetadata>
 }
 
-// Not initialized storage (before init message from registry)
-struct BagItemStorageNotInitialized {
-    bagIndex: uint64
-    registryAddress: address
+type BagItemData = BagItemDataNotInitialized | BagItemDataInitialized
+
+fun serializeBagItemData(data: BagItemData): cell {
+    return data.toCell();
 }
 
-// Helper to detect init state
-struct BagItemStorageMaybeNotInitialized {
-    contractData: slice
+fun BagItemData.load(): BagItemData {
+    return BagItemData.fromCell(contract.getData());
 }
 
-fun BagItemStorageMaybeNotInitialized.isInitialized(self): int {
-    // When initialized, we have name cell as ref
-    return self.contractData.remainingRefsCount()
+fun BagItemData.save(self) {
+    contract.setData(serializeBagItemData(self));
 }
 
-fun BagItemStorageMaybeNotInitialized.parseNotInitialized(self): BagItemStorageNotInitialized {
-    return BagItemStorageNotInitialized.fromSlice(self.contractData)
-}
-
-fun BagItemStorageMaybeNotInitialized.parseInitialized(self): BagItemStorage {
-    return BagItemStorage.fromSlice(self.contractData)
-}
-
-fun startLoadingBagItemStorage(): BagItemStorageMaybeNotInitialized {
-    return {
-        contractData: contract.getData().beginParse()
-    }
-}
-
-fun BagItemStorage.save(self) {
-    contract.setData(self.toCell())
-}
-
-// ============================================
-// ADDRESS CALCULATION
-// ============================================
-
-fun calcDeployedBagItem(bagIndex: uint64, registryAddress: address, bagItemCode: cell): AutoDeployAddress {
-    val emptyBagItemStorage: BagItemStorageNotInitialized = {
-        bagIndex,
-        registryAddress,
-    };
-
-    return {
-        stateInit: {
-            code: bagItemCode,
-            data: emptyBagItemStorage.toCell()
-        }
-    }
+fun calcDeployedBagItem(
+    bagIndex: uint64,
+    registryAddress: address,
+    bagItemCode: cell,
+): AutoDeployAddress {
+    val preInitData: BagItemData = BagItemDataNotInitialized { bagIndex, registryAddress };
+    return { stateInit: { code: bagItemCode, data: serializeBagItemData(preInitData) } };
 }

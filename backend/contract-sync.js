@@ -1,22 +1,18 @@
-// Contract Sync - Fetches bags from BagRegistry (Tolk) and syncs to SQLite
-// Architecture: Master-Item (parent-child)
-// Fully decentralized - no owner
 
 import { TonClient, Address } from '@ton/ton';
 import db from './db.js';
 
 const CONTRACT_ADDRESS = 'EQCLM6BxxUbWnuLCGzIXdADeMRduf4z4P-WoJe-nNhASSs9S';
 
-// Mainnet endpoint with API key
 const ENDPOINT = process.env.TON_ENDPOINT || 'https://toncenter.com/api/v2/jsonRPC';
-const API_KEY = process.env.TON_API_KEY || 'ef398f0b49392f753989912e93420f94715ed7ef5806dd93bffae75f3f706dc0';
+const API_KEY = process.env.TONCENTER_MAINNET_API_KEY || process.env.TON_API_KEY;
 
-const client = new TonClient({
-    endpoint: ENDPOINT,
-    apiKey: API_KEY || undefined
-});
+if (!API_KEY) {
+    console.warn('[contract-sync] No TONCENTER_MAINNET_API_KEY set — TonCenter will rate-limit aggressively.');
+}
 
-// Track last synced index
+const client = new TonClient({ endpoint: ENDPOINT, apiKey: API_KEY });
+
 let lastSyncedIndex = getLastSyncedIndex();
 
 function getLastSyncedIndex() {
@@ -24,10 +20,8 @@ function getLastSyncedIndex() {
     return row?.last_index ?? -1;
 }
 
-// Category names
 const CATEGORY_NAMES = ['video', 'audio', 'apps', 'games', 'books', 'other'];
 
-// Call getter on master contract
 async function callMasterGetter(method, args = []) {
     const address = Address.parse(CONTRACT_ADDRESS);
     try {
@@ -39,7 +33,6 @@ async function callMasterGetter(method, args = []) {
     }
 }
 
-// Call getter on item contract
 async function callItemGetter(itemAddress, method, args = []) {
     try {
         const result = await client.runMethod(itemAddress, method, args);
@@ -50,7 +43,6 @@ async function callItemGetter(itemAddress, method, args = []) {
     }
 }
 
-// Get total bags count from master
 async function getTotalBags() {
     const stack = await callMasterGetter('get_total');
     if (stack && stack.remaining > 0) {
@@ -59,7 +51,6 @@ async function getTotalBags() {
     return 0;
 }
 
-// Get item address by index from master
 async function getBagAddressByIndex(index) {
     const { TupleBuilder } = await import('@ton/core');
     const builder = new TupleBuilder();
@@ -67,20 +58,22 @@ async function getBagAddressByIndex(index) {
 
     const stack = await callMasterGetter('get_bag_address', builder.build());
     if (!stack || stack.remaining === 0) return null;
-
     return stack.readAddress();
 }
 
-// Get bag data from item contract
-// Structure: (init, bagIndex, registryAddress, bagId, nameCell, category, uploader, timestamp, active)
 async function getBagDataFromItem(itemAddress) {
     const stack = await callItemGetter(itemAddress, 'get_bag_data');
     if (!stack || stack.remaining < 9) return null;
 
     try {
-        const init = stack.readNumber() !== 0;
+        const isInitialized = stack.readNumber() !== 0;
         const bagIndex = stack.readBigNumber();
-        const registryAddress = stack.readAddress();
+        stack.readAddress();
+
+        if (!isInitialized) {
+            return null;
+        }
+
         const bagIdBigInt = stack.readBigNumber();
         const nameCell = stack.readCell();
         const category = stack.readNumber();
@@ -88,13 +81,8 @@ async function getBagDataFromItem(itemAddress) {
         const timestamp = stack.readNumber();
         const active = stack.readNumber() !== 0;
 
-        // Skip if not initialized
-        if (!init) return null;
-
-        // Parse bag_id to hex string
         const bagId = bagIdBigInt.toString(16).padStart(64, '0');
 
-        // Parse name from cell
         let name = '';
         try {
             const slice = nameCell.beginParse();
@@ -125,20 +113,21 @@ async function getBagDataFromItem(itemAddress) {
     }
 }
 
-// Get storage metadata from item contract
-// Structure: (descriptionCell, bagSize, filesCount, files, pieceSize, merkleHash, dirNameCell)
 async function getStorageMetadataFromItem(itemAddress) {
     const stack = await callItemGetter(itemAddress, 'get_storage_metadata');
-    if (!stack || stack.remaining < 7) return null;
+    if (!stack || stack.remaining < 8) return null;
 
     try {
-        const descriptionCell = stack.readCell();
+        const isInitialized = stack.readNumber() !== 0;
+        if (!isInitialized) return null;
+
+        stack.readCell();
         const bagSize = stack.readBigNumber();
         const filesCount = stack.readNumber();
-        const files = stack.readCell();
-        const pieceSize = stack.readNumber();
-        const merkleHash = stack.readBigNumber();
-        const dirNameCell = stack.readCell();
+        stack.readCell();
+        stack.readNumber();
+        stack.readBigNumber();
+        stack.readCell();
 
         return {
             size: Number(bagSize),
@@ -150,7 +139,6 @@ async function getStorageMetadataFromItem(itemAddress) {
     }
 }
 
-// Sync new bags from contract to database
 export async function syncFromContract() {
     console.log('Starting contract sync (Master-Item architecture)...');
     console.log('Contract: ' + CONTRACT_ADDRESS);
@@ -168,7 +156,6 @@ export async function syncFromContract() {
         const startIndex = lastSyncedIndex + 1;
 
         for (let i = startIndex; i < total; i++) {
-            // Get item address from master
             const itemAddress = await getBagAddressByIndex(i);
             if (!itemAddress) {
                 console.log('Could not get address for bag ' + i + ', skipping');
@@ -177,29 +164,26 @@ export async function syncFromContract() {
 
             console.log('Bag ' + i + ' address: ' + itemAddress.toString());
 
-            // Get bag data from item contract
             const bag = await getBagDataFromItem(itemAddress);
 
             if (!bag || !bag.active) {
-                console.log('Bag ' + i + ' is null or inactive, skipping');
-                lastSyncedIndex = i;
+                if (bag && !bag.active) {
+                    lastSyncedIndex = i;
+                }
+                console.log('Bag ' + i + ' is uninitialized or inactive, skipping');
                 continue;
             }
 
-            // Get storage metadata (size, files_count)
             const metadata = await getStorageMetadataFromItem(itemAddress);
 
-            // Check if already exists
             const existing = db.prepare('SELECT id FROM bags WHERE bag_id = ?').get(bag.bag_id);
             if (existing) {
-                // Update contract_index and metadata if not set
                 db.prepare('UPDATE bags SET contract_index = ?, size = COALESCE(size, ?), files_count = COALESCE(files_count, ?) WHERE bag_id = ?')
                     .run(i, metadata?.size || null, metadata?.files_count || null, bag.bag_id);
                 lastSyncedIndex = i;
                 continue;
             }
 
-            // Insert new bag with metadata
             try {
                 const stmt = db.prepare(`
                     INSERT INTO bags (bag_id, name, category, uploader_wallet, contract_index, size, files_count, created_at)
@@ -224,8 +208,6 @@ export async function syncFromContract() {
             }
 
             lastSyncedIndex = i;
-
-            // Small delay to avoid rate limiting
             await new Promise(resolve => setTimeout(resolve, 150));
         }
 
@@ -237,7 +219,6 @@ export async function syncFromContract() {
     }
 }
 
-// Check for deleted/deactivated bags
 export async function syncDeletions() {
     console.log('Checking for deactivated bags...');
 
@@ -263,20 +244,16 @@ export async function syncDeletions() {
     }
 }
 
-// Run sync periodically
 export function startSyncLoop(intervalMs = 60000) {
     console.log('Starting sync loop (interval: ' + intervalMs + 'ms)');
     console.log('Contract: ' + CONTRACT_ADDRESS);
 
-    // Initial sync
     syncFromContract();
 
-    // Periodic sync
     setInterval(() => {
         syncFromContract();
     }, intervalMs);
 
-    // Check deletions less frequently
     setInterval(() => {
         syncDeletions();
     }, intervalMs * 5);

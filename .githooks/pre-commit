@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+if git diff --cached --name-only | grep -qE '^contracts/(contracts|tests|scripts|wrappers)/'; then
+    cd contracts
+    acton check
+    acton fmt --check
+fi

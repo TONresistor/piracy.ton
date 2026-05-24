@@ -26,7 +26,6 @@ function formatDate(dateStr) {
     return d.toLocaleDateString();
 }
 
-
 async function loadBagDetail() {
     const params = new URLSearchParams(window.location.search);
     const bagId = params.get('id');
@@ -70,7 +69,7 @@ function renderBag(db, storage) {
     document.getElementById('bag-name').textContent = db.name;
     document.getElementById('bag-size').textContent = storage?.size || db.size || '-';
     document.getElementById('bag-files-count').textContent = storage?.files_count || db.files_count || '-';
-    document.getElementById('bag-peers').textContent = storage?.peers_count ?? db.peers_count ?? '-';
+    document.getElementById('bag-peers').textContent = storage?.peers_count ?? '-';
     document.getElementById('bag-date').textContent = formatDate(db.created_at);
     const uploaderEl = document.getElementById('bag-uploader');
     if (db.uploader_wallet) {

@@ -1,69 +1,45 @@
-// Contract configuration for BagRegistry (Tolk version)
-// Architecture: Master-Item (parent-child)
-// Fully decentralized - no owner
 
 const CONTRACT_ADDRESS = 'EQCLM6BxxUbWnuLCGzIXdADeMRduf4z4P-WoJe-nNhASSs9S';
 
-// Opcodes matching BagRegistry.tolk
-const OP_ADD_BAG = 0x00000001;
+const OP_ADD_BAG = 0x41444247;
 
-// Category mapping
+const REGISTRATION_FEE = '150000000';
+
 const CATEGORY_MAP = { video: 0, audio: 1, apps: 2, games: 3, books: 4, other: 5 };
 
-// Lazy load @ton/core
 let tonCorePromise = null;
-
 function getTonCore() {
     if (!tonCorePromise) {
-        tonCorePromise = import('https://esm.run/@ton/core@0.59.0');
+        tonCorePromise = import('https://esm.run/@ton/core@0.62.0');
     }
     return tonCorePromise;
 }
-
-// Preload
 getTonCore();
 
-/**
- * Build AddBag payload for Tolk contract
- * 
- * Message format:
- *   op (32) + bag_id (256) + name (ref) + category (8)
- *   + description (ref) + bagSize (64) + filesCount (32)
- *   + files (ref) + pieceSize (32) + merkleHash (256) + dirName (ref)
- */
 async function buildAddBagPayload(params) {
     const { beginCell } = await getTonCore();
-    
+
     const {
-        bagId,           // hex string (64 chars)
-        name,            // string
-        category,        // string: video, audio, etc.
-        description,     // string
-        bagSize,         // bigint or number (bytes)
-        filesCount,      // number
-        files,           // Cell or null (empty cell if null)
-        pieceSize,       // number (default 128KB = 131072)
-        merkleHash,      // bigint (default 0)
-        dirName          // string
+        bagId,
+        name,
+        category,
+        description,
+        bagSize,
+        filesCount,
+        files,
+        pieceSize,
+        merkleHash,
+        dirName
     } = params;
 
-    const bagIdBigInt = BigInt('0x' + bagId);
     const categoryNum = CATEGORY_MAP[category] ?? 5;
-    
-    // Build cells for strings
+
     const nameCell = beginCell().storeStringTail(name || '').endCell();
     const descCell = beginCell().storeStringTail(description || '').endCell();
     const dirNameCell = beginCell().storeStringTail(dirName || '').endCell();
-    
-    // Files cell - empty dict if not provided
     const filesCell = files || beginCell().endCell();
-    
-    // Build the message
-    const cell = beginCell()
-        .storeUint(OP_ADD_BAG, 32)
-        .storeUint(bagIdBigInt, 256)
-        .storeRef(nameCell)
-        .storeUint(categoryNum, 8)
+
+    const metadataCell = beginCell()
         .storeRef(descCell)
         .storeUint(BigInt(bagSize || 0), 64)
         .storeUint(filesCount || 0, 32)
@@ -73,17 +49,21 @@ async function buildAddBagPayload(params) {
         .storeRef(dirNameCell)
         .endCell();
 
-    const bocBuffer = cell.toBoc();
-    const base64 = btoa(String.fromCharCode(...new Uint8Array(bocBuffer)));
+    const root = beginCell()
+        .storeUint(OP_ADD_BAG, 32)
+        .storeUint(BigInt('0x' + bagId), 256)
+        .storeUint(categoryNum, 8)
+        .storeRef(nameCell)
+        .storeRef(metadataCell)
+        .endCell();
 
-    return base64;
+    const bocBuffer = root.toBoc();
+    return btoa(String.fromCharCode(...new Uint8Array(bocBuffer)));
 }
 
-// Export to window
 window.ContractHelper = {
     CONTRACT_ADDRESS,
-    // Gas only: 0.1 TON (deploys child contract + message forwarding)
-    REGISTRATION_FEE: '15000000',  // 0.015 TON (gas + child deploy)
+    REGISTRATION_FEE,
     buildAddBagPayload,
     CATEGORY_MAP
 };

@@ -1,29 +1,19 @@
-# Dependencies
 node_modules/
-
-# Build outputs
 build/
 dist/
 temp/
-
-# Environment variables (NEVER commit these)
+/*.boc
+.acton/
+contracts/gen/
 .env
 .env.local
 .env.*.local
-
-# IDE
 .idea/
 .vscode/
 *.swp
 *.swo
-
-# OS files
 .DS_Store
 Thumbs.db
-
-# Logs
 *.log
 npm-debug.log*
-
-# Test coverage
 coverage/

@@ -9,7 +9,6 @@ app.use(express.json());
 
 const TON_STORAGE_API = 'http://127.0.0.1:9090/api/v1';
 
-// Fetch bag info from TON Storage
 async function getBagInfo(bagId, includeFiles = false) {
     try {
         const res = await fetch(`${TON_STORAGE_API}/details?bag_id=${bagId}`);
@@ -36,7 +35,6 @@ async function getBagInfo(bagId, includeFiles = false) {
     return null;
 }
 
-// Format bytes to human readable
 function formatSize(bytes) {
     if (!bytes) return null;
     const units = ['B', 'KB', 'MB', 'GB', 'TB'];
@@ -48,7 +46,6 @@ function formatSize(bytes) {
     return bytes.toFixed(bytes >= 10 ? 0 : 1) + ' ' + units[i];
 }
 
-// GET /api/bags - Liste tous les bags
 app.get('/api/bags', (req, res) => {
     const { category, q, page = 1, limit = 50 } = req.query;
     const offset = (page - 1) * limit;
@@ -82,10 +79,8 @@ app.get('/api/bags', (req, res) => {
     res.json({ bags, total, page: Number(page) });
 });
 
-// GET /api/bags/:id - Détails d'un bag (par id ou bag_id)
 app.get('/api/bags/:id', (req, res) => {
     const { id } = req.params;
-    // Check if it's a bag_id (64 hex chars) or numeric id
     const isBagId = /^[a-fA-F0-9]{64}$/.test(id);
     const bag = isBagId
         ? db.prepare('SELECT * FROM bags WHERE bag_id = ?').get(id)
@@ -96,8 +91,6 @@ app.get('/api/bags/:id', (req, res) => {
     res.json(bag);
 });
 
-// GET /api/bag-info/:bagId - Récupère les infos d'un bag depuis TON Storage
-// Returns all metadata needed for contract registration
 app.get('/api/bag-info/:bagId', async (req, res) => {
     const { bagId } = req.params;
 
@@ -111,14 +104,12 @@ app.get('/api/bag-info/:bagId', async (req, res) => {
     }
 
     res.json({
-        // Display info
         description: info.description,
         size: formatSize(info.size),
         size_bytes: info.size,
         files_count: info.files_count,
         peers_count: info.peers_count,
         files: info.files || [],
-        // Contract metadata
         bag_size: info.bag_size,
         piece_size: info.piece_size,
         merkle_hash: info.merkle_hash,
@@ -126,7 +117,6 @@ app.get('/api/bag-info/:bagId', async (req, res) => {
     });
 });
 
-// GET /api/sync - Trigger manual sync from contract
 app.get('/api/sync', async (req, res) => {
     const result = await syncFromContract();
     res.json(result);
@@ -135,6 +125,5 @@ app.get('/api/sync', async (req, res) => {
 const PORT = process.env.PORT || 3005;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-    // Start contract sync loop (every 60 seconds)
     startSyncLoop(60000);
 });

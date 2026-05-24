@@ -1,272 +1,158 @@
-// BagItem - Child contract for individual bag entries
-// Deployed by BagRegistry (parent) for each bag
-
 import "errors.tolk"
-import "storage.tolk"
-import "messages.tolk"
 import "events.tolk"
+import "messages.tolk"
+import "storage.tolk"
+
+const DEACTIVATED_FLOOR: coins = ton("0.005")
+const OP_DEACTIVATE_BAG: int = 0x44454143
+
+contract BagItem {
+    author: "piracy.ton"
+    version: "2.0.0"
+    description: "Child contract for one indexed TON Storage bag"
+
+    storage: BagItemData
+    storageAtDeployment: BagItemDataNotInitialized
+    incomingMessages: BagItemMessage
+    thrownErrors: BagError
+}
 
 fun onInternalMessage(in: InMessage) {
-    var loadingStorage = startLoadingBagItemStorage();
-
-    // Check if not yet initialized
-    if (!loadingStorage.isInitialized()) {
-        val uninitedSt = loadingStorage.parseNotInitialized();
-
-        // Only registry can initialize
-        assert (in.senderAddress == uninitedSt.registryAddress) throw ERROR_NOT_FROM_REGISTRY;
-
-        // Parse init params from message body
-        val initParams = BagItemInitParams.fromSlice(in.body);
-
-        // Create metadata struct
-        val metadata: BagStorageMetadata = {
-            description: initParams.description,
-            bagSize: initParams.bagSize,
-            filesCount: initParams.filesCount,
-            files: initParams.files,
-            pieceSize: initParams.pieceSize,
-            merkleHash: initParams.merkleHash,
-            dirName: initParams.dirName,
-        };
-
-        // Create initialized storage
-        val storage: BagItemStorage = {
-            bagIndex: uninitedSt.bagIndex,
-            registryAddress: uninitedSt.registryAddress,
-            bagId: initParams.bagId,
-            name: initParams.name,
-            category: initParams.category,
-            uploaderAddress: initParams.uploaderAddress,
-            timestamp: initParams.timestamp,
-            isActive: true,
-            metadata: metadata.toCell(),
-        };
-        storage.save();
+    if (in.body.isEmpty()) {
         return;
     }
 
-    // Already initialized - handle deactivation
-    var storage = loadingStorage.parseInitialized();
+    val data = BagItemData.load();
+    match (data) {
+        BagItemDataNotInitialized => {
+            assert (in.senderAddress == data.registryAddress) throw BagError.NotFromRegistry;
 
-    // Parse message - only uploader can deactivate
-    val msg = DeactivateBag.fromSlice(in.body);
-    assert (in.senderAddress == storage.uploaderAddress) throw ERROR_NOT_FROM_UPLOADER;
+            val params = BagItemInitParams.fromSlice(in.body);
 
-    storage.isActive = false;
-    storage.save();
+            val initialized: BagItemData = BagItemDataInitialized {
+                bagIndex: data.bagIndex,
+                registryAddress: data.registryAddress,
+                bagId: params.bagId,
+                name: params.name,
+                category: params.category,
+                uploaderAddress: params.uploaderAddress,
+                timestamp: params.timestamp,
+                isActive: true,
+                metadata: params.metadata,
+            };
+            initialized.save();
+        }
 
-    // Emit event for indexers
-    emitBagRemoved(storage.bagIndex, in.senderAddress);
+        BagItemDataInitialized => {
+            assert (in.body.preloadUint(32) == OP_DEACTIVATE_BAG) throw 0xFFFF;
+            val _msg = DeactivateBag.fromSlice(in.body);
+
+            assert (in.senderAddress == data.uploaderAddress) throw BagError.NotFromUploader;
+            assert (data.isActive) throw BagError.AlreadyInactive;
+
+            var updated = data;
+            updated.isActive = false;
+            updated.save();
+
+            emitBagRemoved({
+                bagIndex: data.bagIndex,
+                removedBy: in.senderAddress,
+            });
+
+            reserveToncoinsOnBalance(DEACTIVATED_FLOOR, RESERVE_MODE_EXACT_AMOUNT);
+            val refundMsg = createMessage({
+                bounce: BounceMode.NoBounce,
+                dest: in.senderAddress,
+                value: 0,
+            });
+            // SAFETY: mode 128 carries all remaining balance and runs only after
+            // reserveToncoinsOnBalance(DEACTIVATED_FLOOR, EXACT), so the contract
+            // can never be drained below its rent floor. Mode 2 ignores action
+            // errors so a failed refund cannot revert the committed state.
+            refundMsg.send(SEND_MODE_CARRY_ALL_BALANCE | SEND_MODE_IGNORE_ERRORS);
+        }
+    }
 }
 
-// ============================================
-// GET METHODS
-// ============================================
-
-// Returns tuple: (isInitialized, bagIndex, registryAddress, bagId, name, category, uploaderAddress, timestamp, isActive)
-get fun get_bag_data(): (int, int, address, int, cell, int, address, int, int) {
-    var loadingStorage = startLoadingBagItemStorage();
-
-    if (!loadingStorage.isInitialized()) {
-        val uninitedSt = loadingStorage.parseNotInitialized();
-        return (
-            0,  // not initialized
-            uninitedSt.bagIndex,
-            uninitedSt.registryAddress,
-            0,  // bagId
-            beginCell().endCell(),  // empty name
-            0,  // category
-            uninitedSt.registryAddress,  // placeholder uploader
-            0,  // timestamp
-            0   // not active
-        );
+get fun get_bag_data(): BagDataReply {
+    val data = BagItemData.load();
+    match (data) {
+        BagItemDataNotInitialized => {
+            return {
+                isInitialized: false,
+                bagIndex: data.bagIndex,
+                registryAddress: data.registryAddress,
+                bagId: 0,
+                name: createEmptyCell(),
+                category: 0,
+                uploaderAddress: createAddressNone() as address,
+                timestamp: 0,
+                isActive: false,
+            };
+        }
+        BagItemDataInitialized => {
+            return {
+                isInitialized: true,
+                bagIndex: data.bagIndex,
+                registryAddress: data.registryAddress,
+                bagId: data.bagId,
+                name: data.name,
+                category: data.category,
+                uploaderAddress: data.uploaderAddress,
+                timestamp: data.timestamp,
+                isActive: data.isActive,
+            };
+        }
     }
-
-    val storage = loadingStorage.parseInitialized();
-    return (
-        -1,  // initialized (TVM true)
-        storage.bagIndex,
-        storage.registryAddress,
-        storage.bagId,
-        storage.name,
-        storage.category,
-        storage.uploaderAddress,
-        storage.timestamp,
-        storage.isActive ? -1 : 0
-    );
 }
 
-get fun get_static_data(): (int, address) {
-    var loadingStorage = startLoadingBagItemStorage();
-
-    if (!loadingStorage.isInitialized()) {
-        val uninitedSt = loadingStorage.parseNotInitialized();
-        return (uninitedSt.bagIndex, uninitedSt.registryAddress);
+get fun get_static_data(): StaticDataReply {
+    val data = BagItemData.load();
+    match (data) {
+        BagItemDataNotInitialized => {
+            return { bagIndex: data.bagIndex, registryAddress: data.registryAddress };
+        }
+        BagItemDataInitialized => {
+            return { bagIndex: data.bagIndex, registryAddress: data.registryAddress };
+        }
     }
-
-    val storage = loadingStorage.parseInitialized();
-    return (storage.bagIndex, storage.registryAddress);
 }
 
-get fun is_active(): int {
-    var loadingStorage = startLoadingBagItemStorage();
-
-    if (!loadingStorage.isInitialized()) {
-        return 0;
+get fun get_storage_metadata(): StorageMetadataReply {
+    val data = BagItemData.load();
+    match (data) {
+        BagItemDataNotInitialized => {
+            return {
+                isInitialized: false,
+                description: createEmptyCell(),
+                bagSize: 0,
+                filesCount: 0,
+                files: createEmptyCell(),
+                pieceSize: 0,
+                merkleHash: 0,
+                dirName: createEmptyCell(),
+            };
+        }
+        BagItemDataInitialized => {
+            val m = data.metadata.load();
+            return {
+                isInitialized: true,
+                description: m.description,
+                bagSize: m.bagSize,
+                filesCount: m.filesCount,
+                files: m.files,
+                pieceSize: m.pieceSize,
+                merkleHash: m.merkleHash,
+                dirName: m.dirName,
+            };
+        }
     }
-
-    val storage = loadingStorage.parseInitialized();
-    return storage.isActive ? -1 : 0;
 }
 
-get fun get_bag_id(): int {
-    var loadingStorage = startLoadingBagItemStorage();
-
-    if (!loadingStorage.isInitialized()) {
-        return 0;
-    }
-
-    val storage = loadingStorage.parseInitialized();
-    return storage.bagId;
-}
-
-get fun get_uploader(): address {
-    var loadingStorage = startLoadingBagItemStorage();
-
-    if (!loadingStorage.isInitialized()) {
-        val uninitedSt = loadingStorage.parseNotInitialized();
-        return uninitedSt.registryAddress;  // placeholder
-    }
-
-    val storage = loadingStorage.parseInitialized();
-    return storage.uploaderAddress;
-}
-
-get fun get_category(): int {
-    var loadingStorage = startLoadingBagItemStorage();
-
-    if (!loadingStorage.isInitialized()) {
-        return 0;
-    }
-
-    val storage = loadingStorage.parseInitialized();
-    return storage.category;
-}
-
-// ============================================
-// TON STORAGE METADATA GETTERS
-// ============================================
-
-get fun get_description(): cell {
-    var loadingStorage = startLoadingBagItemStorage();
-
-    if (!loadingStorage.isInitialized()) {
-        return beginCell().endCell();
-    }
-
-    val storage = loadingStorage.parseInitialized();
-    val metadata = BagStorageMetadata.fromCell(storage.metadata);
-    return metadata.description;
-}
-
-get fun get_bag_size(): int {
-    var loadingStorage = startLoadingBagItemStorage();
-
-    if (!loadingStorage.isInitialized()) {
-        return 0;
-    }
-
-    val storage = loadingStorage.parseInitialized();
-    val metadata = BagStorageMetadata.fromCell(storage.metadata);
-    return metadata.bagSize;
-}
-
-get fun get_files_count(): int {
-    var loadingStorage = startLoadingBagItemStorage();
-
-    if (!loadingStorage.isInitialized()) {
-        return 0;
-    }
-
-    val storage = loadingStorage.parseInitialized();
-    val metadata = BagStorageMetadata.fromCell(storage.metadata);
-    return metadata.filesCount;
-}
-
-get fun get_files(): cell {
-    var loadingStorage = startLoadingBagItemStorage();
-
-    if (!loadingStorage.isInitialized()) {
-        return beginCell().endCell();
-    }
-
-    val storage = loadingStorage.parseInitialized();
-    val metadata = BagStorageMetadata.fromCell(storage.metadata);
-    return metadata.files;
-}
-
-get fun get_piece_size(): int {
-    var loadingStorage = startLoadingBagItemStorage();
-
-    if (!loadingStorage.isInitialized()) {
-        return 0;
-    }
-
-    val storage = loadingStorage.parseInitialized();
-    val metadata = BagStorageMetadata.fromCell(storage.metadata);
-    return metadata.pieceSize;
-}
-
-get fun get_merkle_hash(): int {
-    var loadingStorage = startLoadingBagItemStorage();
-
-    if (!loadingStorage.isInitialized()) {
-        return 0;
-    }
-
-    val storage = loadingStorage.parseInitialized();
-    val metadata = BagStorageMetadata.fromCell(storage.metadata);
-    return metadata.merkleHash;
-}
-
-get fun get_dir_name(): cell {
-    var loadingStorage = startLoadingBagItemStorage();
-
-    if (!loadingStorage.isInitialized()) {
-        return beginCell().endCell();
-    }
-
-    val storage = loadingStorage.parseInitialized();
-    val metadata = BagStorageMetadata.fromCell(storage.metadata);
-    return metadata.dirName;
-}
-
-// Full metadata getter
-get fun get_storage_metadata(): (cell, int, int, cell, int, int, cell) {
-    var loadingStorage = startLoadingBagItemStorage();
-
-    if (!loadingStorage.isInitialized()) {
-        return (
-            beginCell().endCell(),  // description
-            0,                       // bagSize
-            0,                       // filesCount
-            beginCell().endCell(),  // files
-            0,                       // pieceSize
-            0,                       // merkleHash
-            beginCell().endCell()   // dirName
-        );
-    }
-
-    val storage = loadingStorage.parseInitialized();
-    val metadata = BagStorageMetadata.fromCell(storage.metadata);
-    return (
-        metadata.description,
-        metadata.bagSize,
-        metadata.filesCount,
-        metadata.files,
-        metadata.pieceSize,
-        metadata.merkleHash,
-        metadata.dirName
-    );
+get fun is_active(): bool {
+    val data = BagItemData.load();
+    return match (data) {
+        BagItemDataNotInitialized => false,
+        BagItemDataInitialized => data.isActive,
+    };
 }

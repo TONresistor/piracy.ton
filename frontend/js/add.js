@@ -34,7 +34,7 @@ const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
 });
 
 let currentWallet = null;
-let currentBagMetadata = null;  // Store fetched metadata
+let currentBagMetadata = null;
 
 tonConnectUI.onStatusChange(wallet => {
     currentWallet = wallet;
@@ -49,7 +49,6 @@ tonConnectUI.onStatusChange(wallet => {
     }
 });
 
-// Fetch bag metadata from TON Storage
 document.getElementById('bag-id').addEventListener('blur', async (e) => {
     const bagId = e.target.value.trim().toLowerCase();
     if (!/^[a-fA-F0-9]{64}$/.test(bagId)) {
@@ -65,7 +64,6 @@ document.getElementById('bag-id').addEventListener('blur', async (e) => {
         if (res.ok) {
             const info = await res.json();
             
-            // Store full metadata for later use
             currentBagMetadata = {
                 description: info.description || '',
                 bagSize: info.size_bytes || 0,
@@ -75,13 +73,11 @@ document.getElementById('bag-id').addEventListener('blur', async (e) => {
                 dirName: info.dir_name || ''
             };
             
-            // Auto-fill name if empty
             const nameInput = document.getElementById('bag-name');
             if (!nameInput.value && info.description) {
                 nameInput.value = info.description;
             }
             
-            // Show info to user
             const sizeStr = info.size || 'Unknown size';
             status.textContent = `${info.files_count} files, ${sizeStr}, ${info.peers_count} peers`;
         } else {
@@ -98,7 +94,7 @@ document.getElementById('upload-form').addEventListener('submit', async (e) => {
     e.preventDefault();
 
     if (!currentWallet) {
-        alert('Please connect your wallet first');
+        alert(t('connect_wallet'));
         return;
     }
 
@@ -108,7 +104,7 @@ document.getElementById('upload-form').addEventListener('submit', async (e) => {
     const status = document.getElementById('upload-status');
 
     if (!/^[a-fA-F0-9]{64}$/.test(bagId)) {
-        status.textContent = 'Invalid Bag ID (must be 64 hex characters)';
+        status.textContent = t('invalid_bagid');
         return;
     }
 
@@ -122,10 +118,9 @@ document.getElementById('upload-form').addEventListener('submit', async (e) => {
         return;
     }
 
-    status.textContent = 'Building transaction...';
+    status.textContent = t('sending_payment');
 
     try {
-        // Build payload with all metadata
         const payload = await ContractHelper.buildAddBagPayload({
             bagId: bagId,
             name: name,
@@ -133,7 +128,7 @@ document.getElementById('upload-form').addEventListener('submit', async (e) => {
             description: currentBagMetadata?.description || name,
             bagSize: currentBagMetadata?.bagSize || 0,
             filesCount: currentBagMetadata?.filesCount || 0,
-            files: null,  // Empty cell (actual files dict too complex for frontend)
+            files: null,
             pieceSize: currentBagMetadata?.pieceSize || 131072,
             merkleHash: currentBagMetadata?.merkleHash || '0',
             dirName: currentBagMetadata?.dirName || ''
@@ -150,11 +145,11 @@ document.getElementById('upload-form').addEventListener('submit', async (e) => {
             }]
         };
 
-        status.textContent = 'Confirm transaction in your wallet...';
+        status.textContent = t('submitting_bag');
 
         const result = await tonConnectUI.sendTransaction(transaction);
 
-        status.textContent = 'Transaction sent! Bag added to blockchain.';
+        status.textContent = t('bag_added');
         currentBagMetadata = null;
         document.getElementById('upload-form').reset();
 
@@ -165,7 +160,7 @@ document.getElementById('upload-form').addEventListener('submit', async (e) => {
     } catch (err) {
         console.error(err);
         if (err.message?.includes('Cancelled')) {
-            status.textContent = 'Transaction cancelled';
+            status.textContent = t('tx_cancelled');
         } else {
             status.textContent = 'Error: ' + (err.message || 'Transaction failed');
         }

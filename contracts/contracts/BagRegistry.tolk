@@ -1,123 +1,120 @@
-// BagRegistry - Master contract for TON Storage bag index
-// Architecture: Parent-Child (like NFT Collection/Item)
-// Fully decentralized - no owner, no fees, no authority
-
 import "errors.tolk"
-import "storage.tolk"
-import "messages.tolk"
 import "events.tolk"
+import "messages.tolk"
+import "storage.tolk"
 
-const ITEM_DEPLOY_AMOUNT: coins = 10000000;     // 0.01 TON to deploy child
+import "gen/BagItem.code"
 
-// Deploy a BagItem child contract
-fun deployBagItem(bagIndex: uint64, bagItemCode: cell, initParams: BagItemInitParams) {
+const ITEM_FUNDING: coins = ton("0.07")
+const MIN_REGISTRY_BALANCE: coins = ton("0.05")
+const MIN_ADD_BAG_VALUE: coins = ton("0.1")
+
+const OP_ADD_BAG: int = 0x41444247
+
+const MAX_USER_CELL_BITS: int = 16384
+const MAX_USER_CELL_CELLS: int = 256
+
+fun assertUserCellBounded(c: cell) {
+    val (cellsOpt, bitsOpt, _, _) = c.beginParse().calculateSize(MAX_USER_CELL_CELLS);
+    val cells = cellsOpt ?? (MAX_USER_CELL_CELLS + 1);
+    val bits = bitsOpt ?? (MAX_USER_CELL_BITS + 1);
+    assert (cells <= MAX_USER_CELL_CELLS) throw BagError.MetadataTooLarge;
+    assert (bits <= MAX_USER_CELL_BITS) throw BagError.MetadataTooLarge;
+}
+
+contract BagRegistry {
+    author: "piracy.ton"
+    version: "2.0.0"
+    description: "Owner-less master registry of TON Storage bags"
+
+    storage: BagRegistryStorage
+    incomingMessages: BagRegistryMessage
+    thrownErrors: BagError
+}
+
+fun deployBagItem(bagIndex: uint64, initParams: BagItemInitParams) {
     val deployMsg = createMessage({
-        bounce: BounceMode.Only256BitsOfBody,
-        dest: calcDeployedBagItem(bagIndex, contract.getAddress(), bagItemCode),
-        value: ITEM_DEPLOY_AMOUNT,
+        bounce: BounceMode.NoBounce,
+        dest: calcDeployedBagItem(bagIndex, contract.getAddress(), bagItemCompiledCode()),
+        value: ITEM_FUNDING,
         body: initParams,
     });
     deployMsg.send(SEND_MODE_PAY_FEES_SEPARATELY);
 }
 
+fun refundSurplusTo(uploader: address) {
+    val refundMsg = createMessage({
+        bounce: BounceMode.NoBounce,
+        dest: uploader,
+        value: 0,
+    });
+    // SAFETY: mode 128 carries all remaining balance and runs only after
+    // reserveToncoinsOnBalance(MIN_REGISTRY_BALANCE, EXACT), so the registry
+    // can never be drained below its rent reserve. Mode 2 ignores action
+    // errors so a failed refund cannot revert the committed state changes.
+    refundMsg.send(SEND_MODE_CARRY_ALL_BALANCE | SEND_MODE_IGNORE_ERRORS);
+}
+
 fun onInternalMessage(in: InMessage) {
-    // Handle deploy (empty body) - just accept and return
-    if (in.body.remainingBitsCount() == 0) {
+    if (in.body.isEmpty()) {
         return;
     }
 
-    // Only AddBag message is accepted
+    assert (in.body.preloadUint(32) == OP_ADD_BAG) throw 0xFFFF;
+
     val msg = AddBag.fromSlice(in.body);
 
-    // Validate inputs
-    assert (msg.bagId != 0) throw ERROR_INVALID_BAG_ID;
-    assert (msg.category <= 5) throw ERROR_INVALID_CATEGORY;
+    assert (in.valueCoins >= MIN_ADD_BAG_VALUE) throw BagError.InsufficientValue;
+    assert (msg.bagId != 0) throw BagError.InvalidBagId;
+    assert (msg.category <= 5) throw BagError.InvalidCategory;
 
-    var storage = lazy BagRegistryStorage.load();
+    assertUserCellBounded(msg.name);
+    assertUserCellBounded(msg.metadata as cell);
+
+    var storage = BagRegistryStorage.load();
     val bagIndex = storage.nextBagIndex;
+    val now = blockchain.now() as uint64;
 
-    // Create init params for child
     val initParams: BagItemInitParams = {
         bagId: msg.bagId,
-        name: msg.name,
         category: msg.category,
         uploaderAddress: in.senderAddress,
-        timestamp: blockchain.now(),
-
-        // TON Storage metadata
-        description: msg.description,
-        bagSize: msg.bagSize,
-        filesCount: msg.filesCount,
-        files: msg.files,
-        pieceSize: msg.pieceSize,
-        merkleHash: msg.merkleHash,
-        dirName: msg.dirName,
+        timestamp: now,
+        name: msg.name,
+        metadata: msg.metadata,
     };
 
-    // Deploy child contract
-    deployBagItem(bagIndex, storage.bagItemCode, initParams);
+    deployBagItem(bagIndex, initParams);
 
-    // Emit event for indexers
-    emitBagIndexed(
+    emitBagIndexed({
         bagIndex,
-        msg.bagId,
-        msg.category,
-        in.senderAddress,
-        blockchain.now(),
-        msg.name,
-        msg.description,
-        msg.bagSize,
-        msg.filesCount,
-        msg.files,
-        msg.pieceSize,
-        msg.merkleHash,
-        msg.dirName
-    );
+        bagId: msg.bagId,
+        category: msg.category,
+        uploader: in.senderAddress,
+        timestamp: now,
+        name: msg.name,
+    });
 
-    // Update storage
-    storage.nextBagIndex += 1;
+    reserveToncoinsOnBalance(MIN_REGISTRY_BALANCE, RESERVE_MODE_EXACT_AMOUNT);
+    refundSurplusTo(in.senderAddress);
+
+    storage.nextBagIndex = bagIndex + 1;
     storage.save();
 }
 
-// ============================================
-// BOUNCE HANDLER
-// ============================================
-
-fun onBounce(in: InMessage) {
-    var storage = lazy BagRegistryStorage.load();
-
-    if (storage.nextBagIndex == 0) {
-        return;
-    }
-
-    // Calculate expected address of the last deployed BagItem
-    val lastIndex = storage.nextBagIndex - 1;
-    val expectedAddress = calcDeployedBagItem(
-        lastIndex,
-        contract.getAddress(),
-        storage.bagItemCode
-    ).calculateAddress();
-
-    // Only decrement if bounce came from that exact address
-    if (in.senderAddress == expectedAddress) {
-        storage.nextBagIndex = lastIndex;
-        storage.save();
-    }
-    // Silently ignore invalid bounces (attack attempts or stale bounces)
-}
-
-// ============================================
-// GET METHODS
-// ============================================
-
 get fun get_total(): int {
-    val storage = lazy BagRegistryStorage.load();
+    val storage = BagRegistryStorage.load();
     return storage.nextBagIndex;
 }
 
 get fun get_bag_address(bagIndex: int): address {
-    val storage = lazy BagRegistryStorage.load();
-    val deployed = calcDeployedBagItem(bagIndex as uint64, contract.getAddress(), storage.bagItemCode);
+    val storage = BagRegistryStorage.load();
+    assert (bagIndex >= 0 && bagIndex < storage.nextBagIndex) throw BagError.IndexOutOfRange;
+    val deployed = calcDeployedBagItem(
+        bagIndex as uint64,
+        contract.getAddress(),
+        bagItemCompiledCode(),
+    );
     return deployed.calculateAddress();
 }
 
@@ -126,6 +123,5 @@ get fun get_balance(): int {
 }
 
 get fun get_item_code(): cell {
-    val storage = lazy BagRegistryStorage.load();
-    return storage.bagItemCode;
+    return bagItemCompiledCode();
 }
