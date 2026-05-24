@@ -75,7 +75,7 @@ function renderBags(bags) {
             <td class="bag-name">${escapeHtml(bag.name)}</td>
             <td>${formatSize(bag.size)}</td>
             <td>${bag.files_count || '-'}</td>
-            <td>${bag.peers_count || 0}</td>
+            <td>${bag.peers_count ?? '-'}</td>
             <td>${formatDate(bag.created_at)}</td>
             <td>
                 <div class="bag-id" title="Click to copy">

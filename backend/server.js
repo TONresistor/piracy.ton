@@ -46,7 +46,28 @@ function formatSize(bytes) {
     return bytes.toFixed(bytes >= 10 ? 0 : 1) + ' ' + units[i];
 }
 
-app.get('/api/bags', (req, res) => {
+const peersCache = new Map();
+const PEERS_TTL_MS = 60_000;
+
+async function fetchPeersCount(bagId) {
+    const cached = peersCache.get(bagId);
+    if (cached && Date.now() - cached.at < PEERS_TTL_MS) return cached.value;
+    try {
+        const ctrl = new AbortController();
+        const t = setTimeout(() => ctrl.abort(), 1500);
+        const res = await fetch(`${TON_STORAGE_API}/details?bag_id=${bagId}`, { signal: ctrl.signal });
+        clearTimeout(t);
+        if (!res.ok) return null;
+        const data = await res.json();
+        const value = data.peers ? data.peers.length : 0;
+        peersCache.set(bagId, { value, at: Date.now() });
+        return value;
+    } catch {
+        return null;
+    }
+}
+
+app.get('/api/bags', async (req, res) => {
     const { category, q, page = 1, limit = 50 } = req.query;
     const offset = (page - 1) * limit;
 
@@ -75,6 +96,9 @@ app.get('/api/bags', (req, res) => {
 
     const bags = db.prepare(sql).all(...params, limit, offset);
     const { total } = db.prepare(countSql).get(...params);
+
+    const peers = await Promise.all(bags.map(b => fetchPeersCount(b.bag_id)));
+    bags.forEach((b, i) => { b.peers_count = peers[i]; });
 
     res.json({ bags, total, page: Number(page) });
 });
