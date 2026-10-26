@@ -1,0 +1,3432 @@
+{
+  "timestamp": 1779567283,
+  "opcodes": {
+    "DeactivateBag": {
+      "min_gas": 1439,
+      "max_gas": 5554,
+      "avg_gas": 4296,
+      "samples": 13,
+      "all_values": [
+        5554,
+        1491,
+        5554,
+        5554,
+        5554,
+        1491,
+        5554,
+        5554,
+        5554,
+        1439,
+        1439,
+        5554,
+        5554
+      ]
+    },
+    "AddBag": {
+      "min_gas": 877,
+      "max_gas": 36240,
+      "avg_gas": 11641,
+      "samples": 69,
+      "all_values": [
+        28023,
+        10640,
+        10640,
+        10640,
+        10640,
+        10640,
+        10640,
+        10640,
+        10640,
+        10640,
+        877,
+        10640,
+        3365,
+        10640,
+        929,
+        10640,
+        10640,
+        877,
+        10640,
+        10640,
+        27255,
+        10640,
+        10640,
+        10640,
+        10640,
+        35540,
+        10640,
+        10640,
+        10640,
+        10640,
+        10640,
+        10640,
+        877,
+        10640,
+        10640,
+        10640,
+        10640,
+        10640,
+        10640,
+        10640,
+        1007,
+        10640,
+        10640,
+        10640,
+        10640,
+        10640,
+        10640,
+        10640,
+        10640,
+        10640,
+        10640,
+        10640,
+        16940,
+        10640,
+        10640,
+        10740,
+        36240,
+        27255,
+        10640,
+        10640,
+        10640,
+        10640,
+        10640,
+        10740,
+        10640,
+        10640,
+        10640,
+        28023,
+        10640
+      ]
+    },
+    "0xdeadbeef": {
+      "min_gas": 613,
+      "max_gas": 613,
+      "avg_gas": 613,
+      "samples": 1,
+      "all_values": [
+        613
+      ]
+    },
+    "BagItemInitParams": {
+      "min_gas": 1427,
+      "max_gas": 2507,
+      "avg_gas": 2489,
+      "samples": 61,
+      "all_values": [
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        1427,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507,
+        2507
+      ]
+    },
+    "0xbadc0de5": {
+      "min_gas": 1242,
+      "max_gas": 1242,
+      "avg_gas": 1242,
+      "samples": 1,
+      "all_values": [
+        1242
+      ]
+    }
+  },
+  "trace_chains": {
+    "test deployed child holds resident balance near reserve::trace#2": {
+      "test_name": "test deployed child holds resident balance near reserve",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test init from non registry fails with 270::trace#4": {
+      "test_name": "test init from non registry fails with 270",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test name cell at exactly the 256 cell limit is accepted::trace#5": {
+      "test_name": "test name cell at exactly the 256 cell limit is accepted",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 39056,
+      "total_gas_fees": 2603736,
+      "total_forward_fees": 2791580,
+      "total_fees": 5219702
+    },
+    "test name cell over the bit limit but within cell limit is rejected 259::trace#5": {
+      "test_name": "test name cell over the bit limit but within cell limit is rejected 259",
+      "trace_name": "Trace 5",
+      "tx_count": 1,
+      "total_gas_used": 3365,
+      "total_gas_fees": 224334,
+      "total_forward_fees": 981253,
+      "total_fees": 224334
+    },
+    "test every child address is distinct and re-derivable::trace#5": {
+      "test_name": "test every child address is distinct and re-derivable",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test overpaying uploader keeps almost all the value::trace#4": {
+      "test_name": "test overpaying uploader keeps almost all the value",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test deactivation refunds residual to uploader::trace#3": {
+      "test_name": "test deactivation refunds residual to uploader",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test registry balance does not grow over five addbag::trace#3": {
+      "test_name": "test registry balance does not grow over five addbag",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test registry balance stays near reserve after one addbag::trace#2": {
+      "test_name": "test registry balance stays near reserve after one addbag",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test get_bag_address valid index returns child address::trace#4": {
+      "test_name": "test get_bag_address valid index returns child address",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test name cell at exactly the 16384 bit limit is accepted::trace#3": {
+      "test_name": "test name cell at exactly the 16384 bit limit is accepted",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test round trip address survives deactivation::trace#4": {
+      "test_name": "test round trip address survives deactivation",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test short non-empty body to registry is not accepted::trace#2": {
+      "test_name": "test short non-empty body to registry is not accepted",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uninitialized item is not active::trace#5": {
+      "test_name": "test uninitialized item is not active",
+      "trace_name": "Trace 5",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 313559,
+      "total_fees": 29401
+    },
+    "test empty body top up to initialized child succeeds::trace#2": {
+      "test_name": "test empty body top up to initialized child succeeds",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uninitialized item is not active::trace#2": {
+      "test_name": "test uninitialized item is not active",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uninitialized item reports not initialized::trace#3": {
+      "test_name": "test uninitialized item reports not initialized",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test second deactivation on inactive bag fails with 272::trace#7": {
+      "test_name": "test second deactivation on inactive bag fails with 272",
+      "trace_name": "Trace 7",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 44446,
+      "total_fees": 29401
+    },
+    "test registry address matches independent derivation::trace#2": {
+      "test_name": "test registry address matches independent derivation",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uninitialized getters return zero and none sentinels::trace#2": {
+      "test_name": "test uninitialized getters return zero and none sentinels",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uninitialized item reports not initialized::trace#5": {
+      "test_name": "test uninitialized item reports not initialized",
+      "trace_name": "Trace 5",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 313559,
+      "total_fees": 29401
+    },
+    "test unknown opcode to registry fails with 0xFFFF::trace#5": {
+      "test_name": "test unknown opcode to registry fails with 0xFFFF",
+      "trace_name": "Trace 5",
+      "tx_count": 1,
+      "total_gas_used": 613,
+      "total_gas_fees": 40868,
+      "total_forward_fees": 44446,
+      "total_fees": 40868
+    },
+    "test registry derived address opens a live child::trace#4": {
+      "test_name": "test registry derived address opens a live child",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test index never decreases across many addbag::trace#3": {
+      "test_name": "test index never decreases across many addbag",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test init from non registry fails with 270::trace#6": {
+      "test_name": "test init from non registry fails with 270",
+      "trace_name": "Trace 6",
+      "tx_count": 1,
+      "total_gas_used": 1427,
+      "total_gas_fees": 95134,
+      "total_forward_fees": 121024,
+      "total_fees": 95134
+    },
+    "test name cell over the bit limit but within cell limit is rejected 259::trace#3": {
+      "test_name": "test name cell over the bit limit but within cell limit is rejected 259",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test round trip address survives deactivation::trace#5": {
+      "test_name": "test round trip address survives deactivation",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test successive addbag allocate contiguous indices::trace#4": {
+      "test_name": "test successive addbag allocate contiguous indices",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test name cell one cell over the 256 limit is rejected 259::trace#1": {
+      "test_name": "test name cell one cell over the 256 limit is rejected 259",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test init from registry address succeeds::trace#1": {
+      "test_name": "test init from registry address succeeds",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test deactivated child balance shrinks to rent floor::trace#4": {
+      "test_name": "test deactivated child balance shrinks to rent floor",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test deactivation does not emit event on failure::trace#4": {
+      "test_name": "test deactivation does not emit event on failure",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test addbag at exactly minimum value succeeds::trace#4": {
+      "test_name": "test addbag at exactly minimum value succeeds",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test get_bag_address valid index returns child address::trace#5": {
+      "test_name": "test get_bag_address valid index returns child address",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test init from non registry fails with 270::trace#3": {
+      "test_name": "test init from non registry fails with 270",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test name cell at exactly the 256 cell limit is accepted::trace#2": {
+      "test_name": "test name cell at exactly the 256 cell limit is accepted",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag accepts every category in range::trace#9": {
+      "test_name": "test addbag accepts every category in range",
+      "trace_name": "Trace 9",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test empty body top up to uninitialized child succeeds::trace#4": {
+      "test_name": "test empty body top up to uninitialized child succeeds",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test non uploader cannot deactivate fails with 271::trace#2": {
+      "test_name": "test non uploader cannot deactivate fails with 271",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test name cell with exactly four root refs is accepted::trace#3": {
+      "test_name": "test name cell with exactly four root refs is accepted",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag emits BagIndexedEvent::trace#2": {
+      "test_name": "test addbag emits BagIndexedEvent",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test init from registry address succeeds::trace#2": {
+      "test_name": "test init from registry address succeeds",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test name cell with three root refs is accepted::trace#5": {
+      "test_name": "test name cell with three root refs is accepted",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13556,
+      "total_gas_fees": 903736,
+      "total_forward_fees": 524896,
+      "total_fees": 1253044
+    },
+    "test addbag with oversized metadata fails with 259::trace#1": {
+      "test_name": "test addbag with oversized metadata fails with 259",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test short non-empty body to registry is not accepted::trace#4": {
+      "test_name": "test short non-empty body to registry is not accepted",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test uninitialized getters return zero and none sentinels::trace#5": {
+      "test_name": "test uninitialized getters return zero and none sentinels",
+      "trace_name": "Trace 5",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 313559,
+      "total_fees": 29401
+    },
+    "test uninitialized storage metadata is empty sentinels::trace#4": {
+      "test_name": "test uninitialized storage metadata is empty sentinels",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test uploader is refunded the overpayment surplus::trace#1": {
+      "test_name": "test uploader is refunded the overpayment surplus",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test index never decreases across many addbag::trace#4": {
+      "test_name": "test index never decreases across many addbag",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test empty body top up to initialized child succeeds::trace#6": {
+      "test_name": "test empty body top up to initialized child succeeds",
+      "trace_name": "Trace 6",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 44446,
+      "total_fees": 29401
+    },
+    "test embedded item code equals standalone build code::trace#3": {
+      "test_name": "test embedded item code equals standalone build code",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test storage metadata round trips all fields::trace#1": {
+      "test_name": "test storage metadata round trips all fields",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test registry balance does not grow over five addbag::trace#2": {
+      "test_name": "test registry balance does not grow over five addbag",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test deactivation emits BagRemovedEvent::trace#6": {
+      "test_name": "test deactivation emits BagRemovedEvent",
+      "trace_name": "Trace 6",
+      "tx_count": 2,
+      "total_gas_used": 5863,
+      "total_gas_fees": 390869,
+      "total_forward_fees": 88892,
+      "total_fees": 479757
+    },
+    "test deployed child holds resident balance near reserve::trace#3": {
+      "test_name": "test deployed child holds resident balance near reserve",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test deactivation produces refund tx from child to uploader::trace#5": {
+      "test_name": "test deactivation produces refund tx from child to uploader",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test addbag with oversized metadata deploys no child::trace#2": {
+      "test_name": "test addbag with oversized metadata deploys no child",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test registry address matches independent derivation::trace#4": {
+      "test_name": "test registry address matches independent derivation",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test addbag with zero bagId fails with 257::trace#4": {
+      "test_name": "test addbag with zero bagId fails with 257",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test get_bag_address out of range fails with 260::trace#1": {
+      "test_name": "test get_bag_address out of range fails with 260",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test registry balance stays near reserve after one addbag::trace#5": {
+      "test_name": "test registry balance stays near reserve after one addbag",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test under payment allocates no index::trace#5": {
+      "test_name": "test under payment allocates no index",
+      "trace_name": "Trace 5",
+      "tx_count": 1,
+      "total_gas_used": 877,
+      "total_gas_fees": 58468,
+      "total_forward_fees": 88713,
+      "total_fees": 58468
+    },
+    "test uninitialized item is not active::trace#4": {
+      "test_name": "test uninitialized item is not active",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test addbag with oversized name cell fails with 259::trace#2": {
+      "test_name": "test addbag with oversized name cell fails with 259",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test get_bag_address valid index returns child address::trace#2": {
+      "test_name": "test get_bag_address valid index returns child address",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test successive addbag allocate contiguous indices::trace#1": {
+      "test_name": "test successive addbag allocate contiguous indices",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uninitialized static data still valid::trace#2": {
+      "test_name": "test uninitialized static data still valid",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test registry does not pocket large overpayment::trace#3": {
+      "test_name": "test registry does not pocket large overpayment",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test unknown opcode to initialized item fails with 0xFFFF::trace#4": {
+      "test_name": "test unknown opcode to initialized item fails with 0xFFFF",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test item becomes initialized after registry addbag::trace#3": {
+      "test_name": "test item becomes initialized after registry addbag",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test deactivation produces refund tx from child to uploader::trace#6": {
+      "test_name": "test deactivation produces refund tx from child to uploader",
+      "trace_name": "Trace 6",
+      "tx_count": 2,
+      "total_gas_used": 5863,
+      "total_gas_fees": 390869,
+      "total_forward_fees": 88892,
+      "total_fees": 479757
+    },
+    "test name cell with exactly four root refs is accepted::trace#5": {
+      "test_name": "test name cell with exactly four root refs is accepted",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13556,
+      "total_gas_fees": 903736,
+      "total_forward_fees": 524896,
+      "total_fees": 1253044
+    },
+    "test get_balance getter is callable and returns a sane int::trace#4": {
+      "test_name": "test get_balance getter is callable and returns a sane int",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test uninitialized static data still valid::trace#3": {
+      "test_name": "test uninitialized static data still valid",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test under payment deploys no child::trace#2": {
+      "test_name": "test under payment deploys no child",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test every child address is distinct and re-derivable::trace#3": {
+      "test_name": "test every child address is distinct and re-derivable",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test item becomes initialized after registry addbag::trace#4": {
+      "test_name": "test item becomes initialized after registry addbag",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test get_bag_address valid index returns child address::trace#1": {
+      "test_name": "test get_bag_address valid index returns child address",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test metadata description at exactly the 256 cell limit is accepted::trace#1": {
+      "test_name": "test metadata description at exactly the 256 cell limit is accepted",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uninitialized item reports not initialized::trace#4": {
+      "test_name": "test uninitialized item reports not initialized",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test deactivation does not emit event on failure::trace#3": {
+      "test_name": "test deactivation does not emit event on failure",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test deactivation does not emit event on failure::trace#5": {
+      "test_name": "test deactivation does not emit event on failure",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test get_bag_address negative index fails with 260::trace#4": {
+      "test_name": "test get_bag_address negative index fails with 260",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test uninitialized getters return zero and none sentinels::trace#4": {
+      "test_name": "test uninitialized getters return zero and none sentinels",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test name cell at exactly the 16384 bit limit is accepted::trace#1": {
+      "test_name": "test name cell at exactly the 16384 bit limit is accepted",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test short non-empty body to registry is not accepted::trace#5": {
+      "test_name": "test short non-empty body to registry is not accepted",
+      "trace_name": "Trace 5",
+      "tx_count": 1,
+      "total_gas_used": 546,
+      "total_gas_fees": 36401,
+      "total_forward_fees": 44446,
+      "total_fees": 36401
+    },
+    "test addbag accepts every category in range::trace#4": {
+      "test_name": "test addbag accepts every category in range",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test deactivated child remains queryable on chain::trace#2": {
+      "test_name": "test deactivated child remains queryable on chain",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test deactivation emits BagRemovedEvent::trace#4": {
+      "test_name": "test deactivation emits BagRemovedEvent",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test every child address is distinct and re-derivable::trace#2": {
+      "test_name": "test every child address is distinct and re-derivable",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test embedded item code equals standalone build code::trace#1": {
+      "test_name": "test embedded item code equals standalone build code",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test registry balance does not grow over five addbag::trace#8": {
+      "test_name": "test registry balance does not grow over five addbag",
+      "trace_name": "Trace 8",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test registry balance does not grow over five addbag::trace#9": {
+      "test_name": "test registry balance does not grow over five addbag",
+      "trace_name": "Trace 9",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test addbag below minimum value fails with 256::trace#1": {
+      "test_name": "test addbag below minimum value fails with 256",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag with oversized metadata fails with 259::trace#3": {
+      "test_name": "test addbag with oversized metadata fails with 259",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test registry balance does not grow over five addbag::trace#7": {
+      "test_name": "test registry balance does not grow over five addbag",
+      "trace_name": "Trace 7",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test uninitialized static data still valid::trace#1": {
+      "test_name": "test uninitialized static data still valid",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test deactivation produces refund tx from child to uploader::trace#1": {
+      "test_name": "test deactivation produces refund tx from child to uploader",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test deactivation refunds residual to uploader::trace#1": {
+      "test_name": "test deactivation refunds residual to uploader",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uninitialized storage metadata is empty sentinels::trace#5": {
+      "test_name": "test uninitialized storage metadata is empty sentinels",
+      "trace_name": "Trace 5",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 313559,
+      "total_fees": 29401
+    },
+    "test addbag produces an empty-body refund to the uploader::trace#3": {
+      "test_name": "test addbag produces an empty-body refund to the uploader",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag with zero bagId fails with 257::trace#5": {
+      "test_name": "test addbag with zero bagId fails with 257",
+      "trace_name": "Trace 5",
+      "tx_count": 1,
+      "total_gas_used": 929,
+      "total_gas_fees": 61934,
+      "total_forward_fees": 88713,
+      "total_fees": 61934
+    },
+    "test deactivation emits BagRemovedEvent::trace#5": {
+      "test_name": "test deactivation emits BagRemovedEvent",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test get_balance getter is callable and returns a sane int::trace#5": {
+      "test_name": "test get_balance getter is callable and returns a sane int",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test addbag accepts every category in range::trace#8": {
+      "test_name": "test addbag accepts every category in range",
+      "trace_name": "Trace 8",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test get_bag_address negative index fails with 260::trace#2": {
+      "test_name": "test get_bag_address negative index fails with 260",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test name cell one cell over the 256 limit is rejected 259::trace#3": {
+      "test_name": "test name cell one cell over the 256 limit is rejected 259",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test get_bag_address negative index fails with 260::trace#5": {
+      "test_name": "test get_bag_address negative index fails with 260",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test overpaying uploader keeps almost all the value::trace#3": {
+      "test_name": "test overpaying uploader keeps almost all the value",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag with zero bagId fails with 257::trace#2": {
+      "test_name": "test addbag with zero bagId fails with 257",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test deactivation produces refund tx from child to uploader::trace#2": {
+      "test_name": "test deactivation produces refund tx from child to uploader",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag at exactly minimum value succeeds::trace#2": {
+      "test_name": "test addbag at exactly minimum value succeeds",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag produces an empty-body refund to the uploader::trace#1": {
+      "test_name": "test addbag produces an empty-body refund to the uploader",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test deactivation produces refund tx from child to uploader::trace#3": {
+      "test_name": "test deactivation produces refund tx from child to uploader",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test metadata description at exactly the 256 cell limit is accepted::trace#2": {
+      "test_name": "test metadata description at exactly the 256 cell limit is accepted",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test index never decreases across many addbag::trace#6": {
+      "test_name": "test index never decreases across many addbag",
+      "trace_name": "Trace 6",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test name cell over the bit limit but within cell limit is rejected 259::trace#1": {
+      "test_name": "test name cell over the bit limit but within cell limit is rejected 259",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test registry derived address opens a live child::trace#3": {
+      "test_name": "test registry derived address opens a live child",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test registry does not pocket large overpayment::trace#2": {
+      "test_name": "test registry does not pocket large overpayment",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test second deactivation emits no duplicate event::trace#1": {
+      "test_name": "test second deactivation emits no duplicate event",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test short non-empty body to registry is not accepted::trace#3": {
+      "test_name": "test short non-empty body to registry is not accepted",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag accepts every category in range::trace#2": {
+      "test_name": "test addbag accepts every category in range",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test deactivation emits BagRemovedEvent::trace#1": {
+      "test_name": "test deactivation emits BagRemovedEvent",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test unknown opcode to initialized item fails with 0xFFFF::trace#5": {
+      "test_name": "test unknown opcode to initialized item fails with 0xFFFF",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test registry address matches independent derivation::trace#5": {
+      "test_name": "test registry address matches independent derivation",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test registry derived address opens a live child::trace#2": {
+      "test_name": "test registry derived address opens a live child",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test overpaying uploader keeps almost all the value::trace#2": {
+      "test_name": "test overpaying uploader keeps almost all the value",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test second deactivation on inactive bag fails with 272::trace#2": {
+      "test_name": "test second deactivation on inactive bag fails with 272",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag with category above five fails with 258::trace#5": {
+      "test_name": "test addbag with category above five fails with 258",
+      "trace_name": "Trace 5",
+      "tx_count": 1,
+      "total_gas_used": 1007,
+      "total_gas_fees": 67134,
+      "total_forward_fees": 88713,
+      "total_fees": 67134
+    },
+    "test under payment allocates no index::trace#4": {
+      "test_name": "test under payment allocates no index",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test deactivation refunds residual to uploader::trace#6": {
+      "test_name": "test deactivation refunds residual to uploader",
+      "trace_name": "Trace 6",
+      "tx_count": 2,
+      "total_gas_used": 5863,
+      "total_gas_fees": 390869,
+      "total_forward_fees": 88892,
+      "total_fees": 479757
+    },
+    "test under payment deploys no child::trace#5": {
+      "test_name": "test under payment deploys no child",
+      "trace_name": "Trace 5",
+      "tx_count": 1,
+      "total_gas_used": 877,
+      "total_gas_fees": 58468,
+      "total_forward_fees": 88713,
+      "total_fees": 58468
+    },
+    "test uploader can deactivate the bag::trace#1": {
+      "test_name": "test uploader can deactivate the bag",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag with sufficient value fully succeeds::trace#5": {
+      "test_name": "test addbag with sufficient value fully succeeds",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test addbag accepts every category in range::trace#7": {
+      "test_name": "test addbag accepts every category in range",
+      "trace_name": "Trace 7",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test addbag emits BagIndexedEvent::trace#4": {
+      "test_name": "test addbag emits BagIndexedEvent",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test get_bag_address out of range fails with 260::trace#3": {
+      "test_name": "test get_bag_address out of range fails with 260",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test init from non registry fails with 270::trace#5": {
+      "test_name": "test init from non registry fails with 270",
+      "trace_name": "Trace 5",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 313559,
+      "total_fees": 29401
+    },
+    "test name cell at exactly the 16384 bit limit is accepted::trace#2": {
+      "test_name": "test name cell at exactly the 16384 bit limit is accepted",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test fresh registry exposes embedded item code::trace#3": {
+      "test_name": "test fresh registry exposes embedded item code",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test name cell one cell over the 256 limit is rejected 259::trace#5": {
+      "test_name": "test name cell one cell over the 256 limit is rejected 259",
+      "trace_name": "Trace 5",
+      "tx_count": 1,
+      "total_gas_used": 27255,
+      "total_gas_fees": 1817001,
+      "total_forward_fees": 1229522,
+      "total_fees": 1817001
+    },
+    "test registry does not pocket large overpayment::trace#1": {
+      "test_name": "test registry does not pocket large overpayment",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test second deactivation on inactive bag fails with 272::trace#1": {
+      "test_name": "test second deactivation on inactive bag fails with 272",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag with sufficient value fully succeeds::trace#3": {
+      "test_name": "test addbag with sufficient value fully succeeds",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test successive addbag allocate contiguous indices::trace#6": {
+      "test_name": "test successive addbag allocate contiguous indices",
+      "trace_name": "Trace 6",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test deactivated child balance shrinks to rent floor::trace#1": {
+      "test_name": "test deactivated child balance shrinks to rent floor",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test empty body top up to registry succeeds and raises balance::trace#4": {
+      "test_name": "test empty body top up to registry succeeds and raises balance",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test addbag with oversized metadata fails with 259::trace#5": {
+      "test_name": "test addbag with oversized metadata fails with 259",
+      "trace_name": "Trace 5",
+      "tx_count": 1,
+      "total_gas_used": 28023,
+      "total_gas_fees": 1868201,
+      "total_forward_fees": 1865793,
+      "total_fees": 1868201
+    },
+    "test get_bag_address negative index fails with 260::trace#1": {
+      "test_name": "test get_bag_address negative index fails with 260",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test round trip address survives deactivation::trace#2": {
+      "test_name": "test round trip address survives deactivation",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test deployed child holds resident balance near reserve::trace#1": {
+      "test_name": "test deployed child holds resident balance near reserve",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uninitialized item reports not initialized::trace#1": {
+      "test_name": "test uninitialized item reports not initialized",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test unknown opcode to initialized item fails with 0xFFFF::trace#2": {
+      "test_name": "test unknown opcode to initialized item fails with 0xFFFF",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test non uploader cannot deactivate fails with 271::trace#1": {
+      "test_name": "test non uploader cannot deactivate fails with 271",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test name cell with three root refs is accepted::trace#4": {
+      "test_name": "test name cell with three root refs is accepted",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test unknown opcode to registry fails with 0xFFFF::trace#4": {
+      "test_name": "test unknown opcode to registry fails with 0xFFFF",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test addbag with sufficient value fully succeeds::trace#1": {
+      "test_name": "test addbag with sufficient value fully succeeds",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uninitialized item is not active::trace#1": {
+      "test_name": "test uninitialized item is not active",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test under payment deploys no child::trace#4": {
+      "test_name": "test under payment deploys no child",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test empty body top up to initialized child succeeds::trace#5": {
+      "test_name": "test empty body top up to initialized child succeeds",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test index never decreases across many addbag::trace#9": {
+      "test_name": "test index never decreases across many addbag",
+      "trace_name": "Trace 9",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test name cell over the bit limit but within cell limit is rejected 259::trace#2": {
+      "test_name": "test name cell over the bit limit but within cell limit is rejected 259",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag with oversized metadata fails with 259::trace#2": {
+      "test_name": "test addbag with oversized metadata fails with 259",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test deactivation refunds residual to uploader::trace#2": {
+      "test_name": "test deactivation refunds residual to uploader",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test under payment deploys no child::trace#3": {
+      "test_name": "test under payment deploys no child",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag produces an empty-body refund to the uploader::trace#2": {
+      "test_name": "test addbag produces an empty-body refund to the uploader",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test registry balance stays near reserve after one addbag::trace#1": {
+      "test_name": "test registry balance stays near reserve after one addbag",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uploader is refunded the overpayment surplus::trace#2": {
+      "test_name": "test uploader is refunded the overpayment surplus",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag with sufficient value fully succeeds::trace#2": {
+      "test_name": "test addbag with sufficient value fully succeeds",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test registry balance does not grow over five addbag::trace#6": {
+      "test_name": "test registry balance does not grow over five addbag",
+      "trace_name": "Trace 6",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test deactivated child remains queryable on chain::trace#1": {
+      "test_name": "test deactivated child remains queryable on chain",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test registry does not pocket large overpayment::trace#5": {
+      "test_name": "test registry does not pocket large overpayment",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test empty body top up to uninitialized child succeeds::trace#5": {
+      "test_name": "test empty body top up to uninitialized child succeeds",
+      "trace_name": "Trace 5",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 313559,
+      "total_fees": 29401
+    },
+    "test non uploader cannot deactivate fails with 271::trace#3": {
+      "test_name": "test non uploader cannot deactivate fails with 271",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag produces an empty-body refund to the uploader::trace#5": {
+      "test_name": "test addbag produces an empty-body refund to the uploader",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test name cell at exactly the 16384 bit limit is accepted::trace#4": {
+      "test_name": "test name cell at exactly the 16384 bit limit is accepted",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test non uploader cannot deactivate fails with 271::trace#4": {
+      "test_name": "test non uploader cannot deactivate fails with 271",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test deactivation does not emit event on failure::trace#1": {
+      "test_name": "test deactivation does not emit event on failure",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag with zero bagId fails with 257::trace#3": {
+      "test_name": "test addbag with zero bagId fails with 257",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag at exactly minimum value succeeds::trace#5": {
+      "test_name": "test addbag at exactly minimum value succeeds",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test fresh registry has total zero::trace#3": {
+      "test_name": "test fresh registry has total zero",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test second deactivation emits no duplicate event::trace#8": {
+      "test_name": "test second deactivation emits no duplicate event",
+      "trace_name": "Trace 8",
+      "tx_count": 1,
+      "total_gas_used": 1491,
+      "total_gas_fees": 99401,
+      "total_forward_fees": 44446,
+      "total_fees": 99401
+    },
+    "test storage metadata round trips all fields::trace#5": {
+      "test_name": "test storage metadata round trips all fields",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test uninitialized storage metadata is empty sentinels::trace#3": {
+      "test_name": "test uninitialized storage metadata is empty sentinels",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test embedded item code equals standalone build code::trace#2": {
+      "test_name": "test embedded item code equals standalone build code",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test second deactivation emits no duplicate event::trace#2": {
+      "test_name": "test second deactivation emits no duplicate event",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uploader can deactivate the bag::trace#5": {
+      "test_name": "test uploader can deactivate the bag",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test round trip address survives deactivation::trace#3": {
+      "test_name": "test round trip address survives deactivation",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test deactivated child remains queryable on chain::trace#6": {
+      "test_name": "test deactivated child remains queryable on chain",
+      "trace_name": "Trace 6",
+      "tx_count": 2,
+      "total_gas_used": 5863,
+      "total_gas_fees": 390869,
+      "total_forward_fees": 88892,
+      "total_fees": 479757
+    },
+    "test deactivated child remains queryable on chain::trace#4": {
+      "test_name": "test deactivated child remains queryable on chain",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test name cell at exactly the 16384 bit limit is accepted::trace#5": {
+      "test_name": "test name cell at exactly the 16384 bit limit is accepted",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 19756,
+      "total_gas_fees": 1317069,
+      "total_forward_fees": 2536822,
+      "total_fees": 3676058
+    },
+    "test registry address matches independent derivation::trace#1": {
+      "test_name": "test registry address matches independent derivation",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test second deactivation on inactive bag fails with 272::trace#4": {
+      "test_name": "test second deactivation on inactive bag fails with 272",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test registry balance does not grow over five addbag::trace#1": {
+      "test_name": "test registry balance does not grow over five addbag",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag with oversized metadata deploys no child::trace#3": {
+      "test_name": "test addbag with oversized metadata deploys no child",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test get_balance getter is callable and returns a sane int::trace#3": {
+      "test_name": "test get_balance getter is callable and returns a sane int",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag with category above five fails with 258::trace#4": {
+      "test_name": "test addbag with category above five fails with 258",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test index never decreases across many addbag::trace#7": {
+      "test_name": "test index never decreases across many addbag",
+      "trace_name": "Trace 7",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test init from non registry fails with 270::trace#2": {
+      "test_name": "test init from non registry fails with 270",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test registry balance stays near reserve after one addbag::trace#3": {
+      "test_name": "test registry balance stays near reserve after one addbag",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag with category above five fails with 258::trace#3": {
+      "test_name": "test addbag with category above five fails with 258",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test item becomes initialized after registry addbag::trace#5": {
+      "test_name": "test item becomes initialized after registry addbag",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test deactivated child balance shrinks to rent floor::trace#5": {
+      "test_name": "test deactivated child balance shrinks to rent floor",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test addbag with oversized name cell fails with 259::trace#3": {
+      "test_name": "test addbag with oversized name cell fails with 259",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test second deactivation on inactive bag fails with 272::trace#5": {
+      "test_name": "test second deactivation on inactive bag fails with 272",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test successive addbag allocate contiguous indices::trace#7": {
+      "test_name": "test successive addbag allocate contiguous indices",
+      "trace_name": "Trace 7",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test addbag accepts every category in range::trace#1": {
+      "test_name": "test addbag accepts every category in range",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uninitialized static data still valid::trace#4": {
+      "test_name": "test uninitialized static data still valid",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test name cell with exactly four root refs is accepted::trace#2": {
+      "test_name": "test name cell with exactly four root refs is accepted",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test metadata description at exactly the 256 cell limit is accepted::trace#5": {
+      "test_name": "test metadata description at exactly the 256 cell limit is accepted",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 38356,
+      "total_gas_fees": 2557069,
+      "total_forward_fees": 2730780,
+      "total_fees": 3453302
+    },
+    "test index never decreases across many addbag::trace#8": {
+      "test_name": "test index never decreases across many addbag",
+      "trace_name": "Trace 8",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test round trip address survives deactivation::trace#1": {
+      "test_name": "test round trip address survives deactivation",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uploader is refunded the overpayment surplus::trace#4": {
+      "test_name": "test uploader is refunded the overpayment surplus",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test get_bag_address out of range fails with 260::trace#2": {
+      "test_name": "test get_bag_address out of range fails with 260",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uninitialized storage metadata is empty sentinels::trace#2": {
+      "test_name": "test uninitialized storage metadata is empty sentinels",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test name cell at exactly the 256 cell limit is accepted::trace#1": {
+      "test_name": "test name cell at exactly the 256 cell limit is accepted",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test short non-empty body to registry is not accepted::trace#1": {
+      "test_name": "test short non-empty body to registry is not accepted",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uploader can deactivate the bag::trace#6": {
+      "test_name": "test uploader can deactivate the bag",
+      "trace_name": "Trace 6",
+      "tx_count": 2,
+      "total_gas_used": 5863,
+      "total_gas_fees": 390869,
+      "total_forward_fees": 88892,
+      "total_fees": 479757
+    },
+    "test under payment allocates no index::trace#3": {
+      "test_name": "test under payment allocates no index",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test unknown opcode to initialized item fails with 0xFFFF::trace#1": {
+      "test_name": "test unknown opcode to initialized item fails with 0xFFFF",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test successive addbag allocate contiguous indices::trace#2": {
+      "test_name": "test successive addbag allocate contiguous indices",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test overpaying uploader keeps almost all the value::trace#5": {
+      "test_name": "test overpaying uploader keeps almost all the value",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test metadata description at exactly the 256 cell limit is accepted::trace#4": {
+      "test_name": "test metadata description at exactly the 256 cell limit is accepted",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test init from non registry fails with 270::trace#1": {
+      "test_name": "test init from non registry fails with 270",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test unknown opcode to registry fails with 0xFFFF::trace#2": {
+      "test_name": "test unknown opcode to registry fails with 0xFFFF",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test deactivated child balance shrinks to rent floor::trace#3": {
+      "test_name": "test deactivated child balance shrinks to rent floor",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uploader can deactivate the bag::trace#2": {
+      "test_name": "test uploader can deactivate the bag",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test empty body top up to initialized child succeeds::trace#1": {
+      "test_name": "test empty body top up to initialized child succeeds",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag below minimum value fails with 256::trace#4": {
+      "test_name": "test addbag below minimum value fails with 256",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test deactivated child balance shrinks to rent floor::trace#2": {
+      "test_name": "test deactivated child balance shrinks to rent floor",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test embedded item code equals standalone build code::trace#4": {
+      "test_name": "test embedded item code equals standalone build code",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test empty body top up to registry succeeds and raises balance::trace#1": {
+      "test_name": "test empty body top up to registry succeeds and raises balance",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test name cell at exactly the 256 cell limit is accepted::trace#4": {
+      "test_name": "test name cell at exactly the 256 cell limit is accepted",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test name cell with three root refs is accepted::trace#2": {
+      "test_name": "test name cell with three root refs is accepted",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test non uploader cannot deactivate fails with 271::trace#6": {
+      "test_name": "test non uploader cannot deactivate fails with 271",
+      "trace_name": "Trace 6",
+      "tx_count": 1,
+      "total_gas_used": 1439,
+      "total_gas_fees": 95934,
+      "total_forward_fees": 44446,
+      "total_fees": 95934
+    },
+    "test overpaying uploader keeps almost all the value::trace#1": {
+      "test_name": "test overpaying uploader keeps almost all the value",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test registry balance does not grow over five addbag::trace#5": {
+      "test_name": "test registry balance does not grow over five addbag",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test get_bag_address index equal to total fails with 260::trace#3": {
+      "test_name": "test get_bag_address index equal to total fails with 260",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uninitialized static data still valid::trace#5": {
+      "test_name": "test uninitialized static data still valid",
+      "trace_name": "Trace 5",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 313559,
+      "total_fees": 29401
+    },
+    "test addbag with oversized metadata deploys no child::trace#1": {
+      "test_name": "test addbag with oversized metadata deploys no child",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test registry derived address opens a live child::trace#5": {
+      "test_name": "test registry derived address opens a live child",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test name cell one cell over the 256 limit is rejected 259::trace#4": {
+      "test_name": "test name cell one cell over the 256 limit is rejected 259",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test deactivated child balance shrinks to rent floor::trace#6": {
+      "test_name": "test deactivated child balance shrinks to rent floor",
+      "trace_name": "Trace 6",
+      "tx_count": 2,
+      "total_gas_used": 5863,
+      "total_gas_fees": 390869,
+      "total_forward_fees": 88892,
+      "total_fees": 479757
+    },
+    "test deactivation does not emit event on failure::trace#6": {
+      "test_name": "test deactivation does not emit event on failure",
+      "trace_name": "Trace 6",
+      "tx_count": 1,
+      "total_gas_used": 1439,
+      "total_gas_fees": 95934,
+      "total_forward_fees": 44446,
+      "total_fees": 95934
+    },
+    "test deactivation refunds residual to uploader::trace#4": {
+      "test_name": "test deactivation refunds residual to uploader",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test second deactivation emits no duplicate event::trace#7": {
+      "test_name": "test second deactivation emits no duplicate event",
+      "trace_name": "Trace 7",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 44446,
+      "total_fees": 29401
+    },
+    "test name cell with exactly four root refs is accepted::trace#4": {
+      "test_name": "test name cell with exactly four root refs is accepted",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test registry balance does not grow over five addbag::trace#10": {
+      "test_name": "test registry balance does not grow over five addbag",
+      "trace_name": "Trace 10",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test second deactivation emits no duplicate event::trace#6": {
+      "test_name": "test second deactivation emits no duplicate event",
+      "trace_name": "Trace 6",
+      "tx_count": 2,
+      "total_gas_used": 5863,
+      "total_gas_fees": 390869,
+      "total_forward_fees": 88892,
+      "total_fees": 479757
+    },
+    "test under payment allocates no index::trace#2": {
+      "test_name": "test under payment allocates no index",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test registry balance stays near reserve after one addbag::trace#4": {
+      "test_name": "test registry balance stays near reserve after one addbag",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test second deactivation emits no duplicate event::trace#5": {
+      "test_name": "test second deactivation emits no duplicate event",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test addbag emits BagIndexedEvent::trace#3": {
+      "test_name": "test addbag emits BagIndexedEvent",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uninitialized item is not active::trace#3": {
+      "test_name": "test uninitialized item is not active",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag below minimum value fails with 256::trace#3": {
+      "test_name": "test addbag below minimum value fails with 256",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uninitialized item reports not initialized::trace#2": {
+      "test_name": "test uninitialized item reports not initialized",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test init from registry address succeeds::trace#3": {
+      "test_name": "test init from registry address succeeds",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test successive addbag allocate contiguous indices::trace#5": {
+      "test_name": "test successive addbag allocate contiguous indices",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test addbag with oversized metadata fails with 259::trace#4": {
+      "test_name": "test addbag with oversized metadata fails with 259",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test index never decreases across many addbag::trace#1": {
+      "test_name": "test index never decreases across many addbag",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag with oversized name cell fails with 259::trace#4": {
+      "test_name": "test addbag with oversized name cell fails with 259",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test fresh registry exposes embedded item code::trace#4": {
+      "test_name": "test fresh registry exposes embedded item code",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test addbag accepts every category in range::trace#6": {
+      "test_name": "test addbag accepts every category in range",
+      "trace_name": "Trace 6",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test addbag below minimum value fails with 256::trace#2": {
+      "test_name": "test addbag below minimum value fails with 256",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test every child address is distinct and re-derivable::trace#1": {
+      "test_name": "test every child address is distinct and re-derivable",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test unknown opcode to initialized item fails with 0xFFFF::trace#3": {
+      "test_name": "test unknown opcode to initialized item fails with 0xFFFF",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test second deactivation on inactive bag fails with 272::trace#6": {
+      "test_name": "test second deactivation on inactive bag fails with 272",
+      "trace_name": "Trace 6",
+      "tx_count": 2,
+      "total_gas_used": 5863,
+      "total_gas_fees": 390869,
+      "total_forward_fees": 88892,
+      "total_fees": 479757
+    },
+    "test empty body top up to uninitialized child succeeds::trace#1": {
+      "test_name": "test empty body top up to uninitialized child succeeds",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test fresh registry has total zero::trace#4": {
+      "test_name": "test fresh registry has total zero",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test deactivated child remains queryable on chain::trace#5": {
+      "test_name": "test deactivated child remains queryable on chain",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test metadata description at exactly the 256 cell limit is accepted::trace#3": {
+      "test_name": "test metadata description at exactly the 256 cell limit is accepted",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test every child address is distinct and re-derivable::trace#7": {
+      "test_name": "test every child address is distinct and re-derivable",
+      "trace_name": "Trace 7",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test second deactivation on inactive bag fails with 272::trace#8": {
+      "test_name": "test second deactivation on inactive bag fails with 272",
+      "trace_name": "Trace 8",
+      "tx_count": 1,
+      "total_gas_used": 1491,
+      "total_gas_fees": 99401,
+      "total_forward_fees": 44446,
+      "total_fees": 99401
+    },
+    "test registry balance does not grow over five addbag::trace#4": {
+      "test_name": "test registry balance does not grow over five addbag",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test addbag with category above five fails with 258::trace#1": {
+      "test_name": "test addbag with category above five fails with 258",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test fresh registry has total zero::trace#2": {
+      "test_name": "test fresh registry has total zero",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test name cell one cell over the 256 limit is rejected 259::trace#2": {
+      "test_name": "test name cell one cell over the 256 limit is rejected 259",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test get_bag_address negative index fails with 260::trace#3": {
+      "test_name": "test get_bag_address negative index fails with 260",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uploader can deactivate the bag::trace#4": {
+      "test_name": "test uploader can deactivate the bag",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test uninitialized storage metadata is empty sentinels::trace#1": {
+      "test_name": "test uninitialized storage metadata is empty sentinels",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test get_balance getter is callable and returns a sane int::trace#1": {
+      "test_name": "test get_balance getter is callable and returns a sane int",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test item becomes initialized after registry addbag::trace#2": {
+      "test_name": "test item becomes initialized after registry addbag",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test non uploader cannot deactivate fails with 271::trace#5": {
+      "test_name": "test non uploader cannot deactivate fails with 271",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test addbag with oversized metadata deploys no child::trace#4": {
+      "test_name": "test addbag with oversized metadata deploys no child",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test addbag with oversized name cell fails with 259::trace#1": {
+      "test_name": "test addbag with oversized name cell fails with 259",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test empty body top up to registry succeeds and raises balance::trace#5": {
+      "test_name": "test empty body top up to registry succeeds and raises balance",
+      "trace_name": "Trace 5",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 44446,
+      "total_fees": 29401
+    },
+    "test get_balance getter is callable and returns a sane int::trace#2": {
+      "test_name": "test get_balance getter is callable and returns a sane int",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag emits BagIndexedEvent::trace#5": {
+      "test_name": "test addbag emits BagIndexedEvent",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test deactivation refunds residual to uploader::trace#5": {
+      "test_name": "test deactivation refunds residual to uploader",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test uninitialized getters return zero and none sentinels::trace#3": {
+      "test_name": "test uninitialized getters return zero and none sentinels",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test index never decreases across many addbag::trace#10": {
+      "test_name": "test index never decreases across many addbag",
+      "trace_name": "Trace 10",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test unknown opcode to registry fails with 0xFFFF::trace#3": {
+      "test_name": "test unknown opcode to registry fails with 0xFFFF",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test every child address is distinct and re-derivable::trace#4": {
+      "test_name": "test every child address is distinct and re-derivable",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test deactivation produces refund tx from child to uploader::trace#4": {
+      "test_name": "test deactivation produces refund tx from child to uploader",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test empty body top up to initialized child succeeds::trace#4": {
+      "test_name": "test empty body top up to initialized child succeeds",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test empty body top up to initialized child succeeds::trace#3": {
+      "test_name": "test empty body top up to initialized child succeeds",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test get_bag_address index equal to total fails with 260::trace#2": {
+      "test_name": "test get_bag_address index equal to total fails with 260",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test name cell with exactly four root refs is accepted::trace#1": {
+      "test_name": "test name cell with exactly four root refs is accepted",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uploader is refunded the overpayment surplus::trace#5": {
+      "test_name": "test uploader is refunded the overpayment surplus",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test addbag with zero bagId fails with 257::trace#1": {
+      "test_name": "test addbag with zero bagId fails with 257",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test deactivation emits BagRemovedEvent::trace#2": {
+      "test_name": "test deactivation emits BagRemovedEvent",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag with category above five fails with 258::trace#2": {
+      "test_name": "test addbag with category above five fails with 258",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test registry address matches independent derivation::trace#3": {
+      "test_name": "test registry address matches independent derivation",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test second deactivation on inactive bag fails with 272::trace#3": {
+      "test_name": "test second deactivation on inactive bag fails with 272",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uninitialized getters return zero and none sentinels::trace#1": {
+      "test_name": "test uninitialized getters return zero and none sentinels",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test storage metadata round trips all fields::trace#3": {
+      "test_name": "test storage metadata round trips all fields",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag with sufficient value fully succeeds::trace#4": {
+      "test_name": "test addbag with sufficient value fully succeeds",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test storage metadata round trips all fields::trace#4": {
+      "test_name": "test storage metadata round trips all fields",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test deactivation emits BagRemovedEvent::trace#3": {
+      "test_name": "test deactivation emits BagRemovedEvent",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test successive addbag allocate contiguous indices::trace#3": {
+      "test_name": "test successive addbag allocate contiguous indices",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test index never decreases across many addbag::trace#5": {
+      "test_name": "test index never decreases across many addbag",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test item becomes initialized after registry addbag::trace#1": {
+      "test_name": "test item becomes initialized after registry addbag",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uploader is refunded the overpayment surplus::trace#3": {
+      "test_name": "test uploader is refunded the overpayment surplus",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test empty body top up to registry succeeds and raises balance::trace#3": {
+      "test_name": "test empty body top up to registry succeeds and raises balance",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test empty body top up to uninitialized child succeeds::trace#6": {
+      "test_name": "test empty body top up to uninitialized child succeeds",
+      "trace_name": "Trace 6",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 44446,
+      "total_fees": 29401
+    },
+    "test index never decreases across many addbag::trace#2": {
+      "test_name": "test index never decreases across many addbag",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test init from registry address succeeds::trace#6": {
+      "test_name": "test init from registry address succeeds",
+      "trace_name": "Trace 6",
+      "tx_count": 1,
+      "total_gas_used": 2507,
+      "total_gas_fees": 167134,
+      "total_forward_fees": 121024,
+      "total_fees": 167134
+    },
+    "test addbag emits BagIndexedEvent::trace#1": {
+      "test_name": "test addbag emits BagIndexedEvent",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test unknown opcode to initialized item fails with 0xFFFF::trace#6": {
+      "test_name": "test unknown opcode to initialized item fails with 0xFFFF",
+      "trace_name": "Trace 6",
+      "tx_count": 1,
+      "total_gas_used": 1242,
+      "total_gas_fees": 82801,
+      "total_forward_fees": 44446,
+      "total_fees": 82801
+    },
+    "test get_bag_address out of range fails with 260::trace#4": {
+      "test_name": "test get_bag_address out of range fails with 260",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test registry does not pocket large overpayment::trace#4": {
+      "test_name": "test registry does not pocket large overpayment",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test unknown opcode to registry fails with 0xFFFF::trace#1": {
+      "test_name": "test unknown opcode to registry fails with 0xFFFF",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test init from registry address succeeds::trace#4": {
+      "test_name": "test init from registry address succeeds",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test addbag accepts every category in range::trace#3": {
+      "test_name": "test addbag accepts every category in range",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test deployed child holds resident balance near reserve::trace#5": {
+      "test_name": "test deployed child holds resident balance near reserve",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test second deactivation emits no duplicate event::trace#4": {
+      "test_name": "test second deactivation emits no duplicate event",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test deactivated child remains queryable on chain::trace#3": {
+      "test_name": "test deactivated child remains queryable on chain",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag accepts every category in range::trace#5": {
+      "test_name": "test addbag accepts every category in range",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test storage metadata round trips all fields::trace#2": {
+      "test_name": "test storage metadata round trips all fields",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag at exactly minimum value succeeds::trace#3": {
+      "test_name": "test addbag at exactly minimum value succeeds",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag at exactly minimum value succeeds::trace#1": {
+      "test_name": "test addbag at exactly minimum value succeeds",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag produces an empty-body refund to the uploader::trace#4": {
+      "test_name": "test addbag produces an empty-body refund to the uploader",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test under payment allocates no index::trace#1": {
+      "test_name": "test under payment allocates no index",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test fresh registry exposes embedded item code::trace#1": {
+      "test_name": "test fresh registry exposes embedded item code",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test deactivation does not emit event on failure::trace#2": {
+      "test_name": "test deactivation does not emit event on failure",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test name cell at exactly the 256 cell limit is accepted::trace#3": {
+      "test_name": "test name cell at exactly the 256 cell limit is accepted",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test get_bag_address valid index returns child address::trace#3": {
+      "test_name": "test get_bag_address valid index returns child address",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test deployed child holds resident balance near reserve::trace#4": {
+      "test_name": "test deployed child holds resident balance near reserve",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test empty body top up to uninitialized child succeeds::trace#3": {
+      "test_name": "test empty body top up to uninitialized child succeeds",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test fresh registry exposes embedded item code::trace#2": {
+      "test_name": "test fresh registry exposes embedded item code",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test under payment deploys no child::trace#1": {
+      "test_name": "test under payment deploys no child",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test uploader can deactivate the bag::trace#3": {
+      "test_name": "test uploader can deactivate the bag",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test registry derived address opens a live child::trace#1": {
+      "test_name": "test registry derived address opens a live child",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag with oversized metadata deploys no child::trace#5": {
+      "test_name": "test addbag with oversized metadata deploys no child",
+      "trace_name": "Trace 5",
+      "tx_count": 1,
+      "total_gas_used": 28023,
+      "total_gas_fees": 1868201,
+      "total_forward_fees": 1865793,
+      "total_fees": 1868201
+    },
+    "test get_bag_address index equal to total fails with 260::trace#5": {
+      "test_name": "test get_bag_address index equal to total fails with 260",
+      "trace_name": "Trace 5",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test every child address is distinct and re-derivable::trace#6": {
+      "test_name": "test every child address is distinct and re-derivable",
+      "trace_name": "Trace 6",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test second deactivation emits no duplicate event::trace#3": {
+      "test_name": "test second deactivation emits no duplicate event",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test name cell with three root refs is accepted::trace#3": {
+      "test_name": "test name cell with three root refs is accepted",
+      "trace_name": "Trace 3",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag below minimum value fails with 256::trace#5": {
+      "test_name": "test addbag below minimum value fails with 256",
+      "trace_name": "Trace 5",
+      "tx_count": 1,
+      "total_gas_used": 877,
+      "total_gas_fees": 58468,
+      "total_forward_fees": 88713,
+      "total_fees": 58468
+    },
+    "test empty body top up to uninitialized child succeeds::trace#2": {
+      "test_name": "test empty body top up to uninitialized child succeeds",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test addbag with oversized name cell fails with 259::trace#5": {
+      "test_name": "test addbag with oversized name cell fails with 259",
+      "trace_name": "Trace 5",
+      "tx_count": 1,
+      "total_gas_used": 27255,
+      "total_gas_fees": 1817001,
+      "total_forward_fees": 1865082,
+      "total_fees": 1817001
+    },
+    "test fresh registry has total zero::trace#1": {
+      "test_name": "test fresh registry has total zero",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test init from registry address succeeds::trace#5": {
+      "test_name": "test init from registry address succeeds",
+      "trace_name": "Trace 5",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 313559,
+      "total_fees": 29401
+    },
+    "test addbag accepts every category in range::trace#10": {
+      "test_name": "test addbag accepts every category in range",
+      "trace_name": "Trace 10",
+      "tx_count": 3,
+      "total_gas_used": 13456,
+      "total_gas_fees": 897069,
+      "total_forward_fees": 523296,
+      "total_fees": 1242555
+    },
+    "test round trip address survives deactivation::trace#6": {
+      "test_name": "test round trip address survives deactivation",
+      "trace_name": "Trace 6",
+      "tx_count": 2,
+      "total_gas_used": 5863,
+      "total_gas_fees": 390869,
+      "total_forward_fees": 88892,
+      "total_fees": 479757
+    },
+    "test get_bag_address index equal to total fails with 260::trace#4": {
+      "test_name": "test get_bag_address index equal to total fails with 260",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test name cell with three root refs is accepted::trace#1": {
+      "test_name": "test name cell with three root refs is accepted",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test name cell over the bit limit but within cell limit is rejected 259::trace#4": {
+      "test_name": "test name cell over the bit limit but within cell limit is rejected 259",
+      "trace_name": "Trace 4",
+      "tx_count": 1,
+      "total_gas_used": 441,
+      "total_gas_fees": 29401,
+      "total_forward_fees": 503116,
+      "total_fees": 29401
+    },
+    "test empty body top up to registry succeeds and raises balance::trace#2": {
+      "test_name": "test empty body top up to registry succeeds and raises balance",
+      "trace_name": "Trace 2",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    },
+    "test get_bag_address index equal to total fails with 260::trace#1": {
+      "test_name": "test get_bag_address index equal to total fails with 260",
+      "trace_name": "Trace 1",
+      "tx_count": 1,
+      "total_gas_used": 309,
+      "total_gas_fees": 20601,
+      "total_forward_fees": 89869,
+      "total_fees": 20601
+    }
+  }
+}

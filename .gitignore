@@ -1,45 +1,37 @@
-# Dependencies
 node_modules/
-
-# Database
 *.db
 *.sqlite
 *.sqlite3
-
-# Environment
+*.db-wal
+*.db-shm
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3-wal
+*.sqlite3-shm
+*.sqlite.partial
 .env
 .env.local
 .env.*.local
-
-# Wallet (deployment scripts)
 wallet/
-
-# IDE
 .idea/
 .vscode/
 *.swp
 *.swo
 *~
-
-# OS
 .DS_Store
 Thumbs.db
-
-# Logs
 *.log
 npm-debug.log*
-
-# Build artifacts
-contracts/build/
+contracts/*/build/
 *.boc
-
-# Temporary files
 tmp/
 temp/
 .cache/
-
-# Claude Code
 .claude/
+contracts/*/coverage.txt
+contracts/*/build/coverage.lcov
 
-# Package locks (optional - uncomment to ignore)
-# package-lock.json
+frontend/dist/
+shared/contract-sdk/dist/
+
+/deploy/

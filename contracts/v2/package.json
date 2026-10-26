@@ -1,0 +1,20 @@
+{
+    "name": "piracy-ton-contracts",
+    "version": "2.0.0",
+    "description": "Decentralized TON Storage bag registry — Acton toolchain. TypeScript wrappers for frontend/backend integration.",
+    "private": true,
+    "scripts": {
+        "build": "acton build",
+        "test": "acton test",
+        "check": "acton check",
+        "fmt": "acton fmt",
+        "wrappers": "acton wrapper --all && acton wrapper --all --ts --output-dir wrappers-ts",
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@ton/core": "^0.62.0"
+    },
+    "devDependencies": {
+        "typescript": "^5.5.0"
+    }
+}

@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+root=$(git rev-parse --show-toplevel)
+for version in v2 v3; do
+    if git -C "$root" diff --cached --name-only -- "contracts/$version/" |
+        grep -qE "^contracts/$version/((contracts|tests|scripts|wrappers|wrappers-ts)/|Acton[.]toml$)"; then
+        (
+            cd "$root/contracts/$version"
+            acton check
+            acton fmt --check
+        )
+    fi
+done

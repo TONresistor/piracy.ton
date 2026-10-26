@@ -1,0 +1,71 @@
+[package]
+name = "piracy-ton-contracts-v3"
+description = "Owner-less publications keyed by uploader and TON Storage bag"
+version = "3.0.0"
+repository = "https://github.com/piracy-ton/piracy.ton"
+license = "MIT"
+
+[toolchain]
+acton = "1.2.1"
+
+[contracts.BagItem]
+display-name = "Bag Item"
+src = "contracts/BagItem.tolk"
+output = "BagItem.boc"
+
+[contracts.BagRegistry]
+display-name = "Bag Registry"
+src = "contracts/BagRegistry.tolk"
+output = "BagRegistry.boc"
+depends = ["BagItem"]
+
+[build]
+out-dir = "build"
+gen-dir = "contracts/gen"
+output-abi = "build/abi"
+output-fift = "build/fift"
+
+[wrappers.tolk]
+output-dir = "wrappers"
+generate-test = false
+
+[wrappers.typescript]
+output-dir = "wrappers-ts"
+
+[test]
+path = "tests"
+
+[test.coverage]
+minimum-percent = 85.0
+
+[test.fuzz]
+runs = 256
+max-test-rejects = 65536
+seed = 20260521
+
+[test.mutation]
+mutation-levels = ["critical", "major", "minor"]
+minimum-percent = 80.0
+
+[scripts]
+deploy-registry = "acton script scripts/deployRegistry.tolk"
+gen-wrappers = "acton wrapper --all && acton wrapper --all --ts --output-dir wrappers-ts"
+
+[lint]
+output-format = "plain"
+
+[fmt]
+width = 100
+separate-import-groups = true
+
+[networks.testnet]
+explorer = "https://testnet.tonviewer.com"
+
+[networks.mainnet]
+explorer = "https://tonviewer.com"
+
+[import-mappings]
+"@acton" = ".acton"
+"@contracts" = "contracts"
+"@tests" = "tests"
+"@wrappers" = "wrappers"

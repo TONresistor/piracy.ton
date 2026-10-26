@@ -1,0 +1,103 @@
+name: contracts
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "contracts/**"
+      - ".github/workflows/contracts.yml"
+  pull_request:
+    paths:
+      - "contracts/**"
+      - ".github/workflows/contracts.yml"
+
+jobs:
+  build:
+    name: build + lint + fmt
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: contracts/${{ matrix.project }}
+    strategy:
+      matrix:
+        project: [v2, v3]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ton-blockchain/setup-acton@master
+        with:
+          working-directory: contracts/${{ matrix.project }}
+      - run: acton --version
+      - run: acton build
+      - name: lint
+        run: acton check --output-format github
+      - name: format check
+        run: acton fmt --check
+
+  test:
+    name: tests + coverage gate
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: contracts/${{ matrix.project }}
+    strategy:
+      matrix:
+        project: [v2, v3]
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ton-blockchain/setup-acton@master
+        with:
+          working-directory: contracts/${{ matrix.project }}
+      - name: tests with coverage gate
+        run: acton test --coverage --coverage-format lcov --coverage-file build/coverage.lcov --reporter console,junit --junit-path build/junit
+      - name: upload coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-lcov-${{ matrix.project }}
+          path: contracts/${{ matrix.project }}/build/coverage.lcov
+      - name: upload junit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: junit-xml-${{ matrix.project }}
+          path: contracts/${{ matrix.project }}/build/junit
+
+  gas:
+    name: gas baseline (no drift)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: contracts/${{ matrix.project }}
+    strategy:
+      matrix:
+        project: [v2, v3]
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ton-blockchain/setup-acton@master
+        with:
+          working-directory: contracts/${{ matrix.project }}
+      - name: assert no gas drift
+        run: acton test --exclude 'tests/fuzz.test.tolk' --baseline-snapshot gas-baseline.json --fail-on-diff
+
+  mutation:
+    name: mutation testing
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: contracts/${{ matrix.project }}
+    strategy:
+      matrix:
+        project: [v2, v3]
+    needs: build
+    if: contains(github.event.head_commit.message, '[mutation]') || github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ton-blockchain/setup-acton@master
+        with:
+          working-directory: contracts/${{ matrix.project }}
+      - name: BagItem
+        run: acton test --mutate --mutate-contract BagItem --mutation-workers 4
+      - name: BagRegistry
+        run: acton test --mutate --mutate-contract BagRegistry --mutation-workers 4
