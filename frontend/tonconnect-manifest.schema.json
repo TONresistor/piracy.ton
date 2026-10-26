@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ton-blockchain/ton-connect/schemas/manifest.schema.json",
+  "title": "TON Connect app manifest",
+  "type": "object",
+  "required": ["url", "name", "iconUrl"],
+  "additionalProperties": true,
+  "not": { "required": ["version"] },
+  "properties": {
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://.+"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "iconUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://.+"
+    },
+    "termsOfUseUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://.+"
+    },
+    "privacyPolicyUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://.+"
+    }
+  }
+}

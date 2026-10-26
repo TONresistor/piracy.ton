@@ -9,13 +9,14 @@
     <meta property="og:description" content="Submit a new Bag ID to the piracy.ton decentralized file indexer.">
     <meta property="og:image" content="/piracy.png">
     <link rel="icon" type="image/png" href="/favicon.png">
-    <link rel="stylesheet" href="css/style.css?v=2">
+    <link rel="stylesheet" href="__STYLE__">
+    <script>(function(){try{var s=localStorage.getItem("theme");if(s==="dark"||(!s&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.setAttribute("data-theme","dark");}catch(e){}})();</script>
 </head>
 <body>
     <header>
         <a href="/" class="logo"><img src="/piracy.png" alt="piracy" class="logo-img">piracy.ton</a>
         <div class="header-right">
-            <button class="theme-toggle" id="theme-toggle" title="Toggle dark mode">
+            <button class="theme-toggle" id="theme-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">
                 <svg id="icon-moon" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
                 <svg id="icon-sun" style="display:none" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 0 0 0-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/></svg>
             </button>
@@ -23,35 +24,61 @@
         </div>
     </header>
 
-    <main>
-        <h2 data-i18n="add_title">Add a Bag</h2>
-        <p id="connect-msg" data-i18n="connect_msg">Connect your wallet to add a bag (0.1 TON fee)</p>
-
+    <main class="add-page">
+        <div class="add-intro">
+            <h2 data-i18n="add_title">Add a Bag</h2>
+            <p data-i18n="v3_share_intro">Share content with the community.</p>
+        </div>
         <form id="upload-form" style="display: none;">
-            <input type="text" id="bag-id" data-i18n-placeholder="bagid_placeholder" placeholder="Bag ID (64 hex characters)" required>
-            <input type="text" id="bag-name" data-i18n-placeholder="name_placeholder" placeholder="Name" required>
-            <select id="bag-category" required>
-                <option value="" data-i18n="category_placeholder">Category</option>
-                <option value="video">🎬 Video</option>
-                <option value="audio">🎵 Audio</option>
-                <option value="apps">💻 Apps</option>
-                <option value="games">🎮 Games</option>
-                <option value="books">📚 Books</option>
-                <option value="other">📁 Other</option>
-            </select>
-            <button type="submit" data-i18n="submit_btn">Pay 0.1 TON & Submit</button>
-            <p id="upload-status"></p>
+            <div class="form-field form-field-wide">
+                <label for="bag-id" data-i18n="th_bagid">Bag ID</label>
+                <input type="text" id="bag-id" data-i18n-placeholder="v3_bag_hint" placeholder="Paste the 64-character Bag ID" maxlength="64" autocomplete="off" spellcheck="false" required>
+            </div>
+            <div class="form-field">
+                <label for="bag-name"><span data-i18n="v3_title_label">Title</span><span class="field-optional" data-i18n="v3_optional">optional</span></label>
+                <input type="text" id="bag-name" data-i18n-placeholder="v3_title_hint" placeholder="A name people can find" maxlength="256">
+            </div>
+            <div class="form-field">
+                <label for="bag-category" data-i18n="category_placeholder">Category</label>
+                <div class="category-picker" id="category-picker">
+                    <input type="text" id="bag-category" data-i18n-placeholder="v3_category_hint" placeholder="Choose a category" pattern="[a-z0-9-]{1,16}" maxlength="16" required autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="category-menu" aria-haspopup="listbox">
+                    <button class="category-toggle" id="category-toggle" type="button" aria-label="Categories" aria-controls="category-menu" aria-expanded="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+                    <div class="category-menu" id="category-menu" role="listbox" aria-label="Categories" hidden>
+                        <button type="button" class="category-option" id="category-video" data-category="video" role="option" aria-selected="false" tabindex="-1"><span data-i18n="cat_video">Video</span><span class="category-check" aria-hidden="true">✓</span></button>
+                        <button type="button" class="category-option" id="category-audio" data-category="audio" role="option" aria-selected="false" tabindex="-1"><span data-i18n="cat_audio">Audio</span><span class="category-check" aria-hidden="true">✓</span></button>
+                        <button type="button" class="category-option" id="category-apps" data-category="apps" role="option" aria-selected="false" tabindex="-1"><span data-i18n="cat_apps">Apps</span><span class="category-check" aria-hidden="true">✓</span></button>
+                        <button type="button" class="category-option" id="category-games" data-category="games" role="option" aria-selected="false" tabindex="-1"><span data-i18n="cat_games">Games</span><span class="category-check" aria-hidden="true">✓</span></button>
+                        <button type="button" class="category-option" id="category-books" data-category="books" role="option" aria-selected="false" tabindex="-1"><span data-i18n="cat_books">Books</span><span class="category-check" aria-hidden="true">✓</span></button>
+                        <button type="button" class="category-option" id="category-other" data-category="other" role="option" aria-selected="false" tabindex="-1"><span data-i18n="cat_other">Other</span><span class="category-check" aria-hidden="true">✓</span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="add-actions">
+                <label class="visibility-option"><span class="visibility-copy"><span data-i18n="v3_catalog_visible">Visible in the catalog</span><small data-i18n="v3_visibility_hint">You can hide this publication later.</small></span><input type="checkbox" role="switch" id="bag-visible" checked></label>
+                <button type="button" id="submit-bag">Connect my wallet</button>
+            </div>
         </form>
+        <p class="add-fee-hint" data-i18n="v3_wallet_fee_hint">Review fees in your wallet before confirming.</p>
+        <p id="connect-msg" class="chain-status" aria-live="polite"></p>
+        <p id="wallet-status" class="wallet-status" aria-live="polite"></p>
+        <p id="funding"></p><button id="release-pending" type="button" hidden data-i18n="v3_release">Release expired request (after checking your wallet)</button>
+        <p id="legacy-status" aria-live="polite"></p>
+        <p id="upload-status" role="status" aria-live="polite"></p>
     </main>
 
-    <footer>
-        <a href="https://t.me/TONpiracy" target="_blank">@TONpiracy</a>
-        <a href="/faq.html">F.A.Q</a>
+    <footer class="app-footer">
+        <div class="app-footer-inner">
+            <a class="app-footer-ton" href="https://ton.org" target="_blank" rel="noreferrer noopener" aria-label="The Open Network">
+                <img src="/assets/icons/ton.svg?v=2" alt="TON">
+            </a>
+            <nav class="app-footer-links" aria-label="Project links">
+                <a href="https://t.me/TONpiracy" target="_blank" rel="noreferrer noopener"><span class="app-footer-telegram-icon" aria-hidden="true"></span><span>Telegram</span></a>
+                <a href="https://github.com/TONresistor/piracy.ton" target="_blank" rel="noreferrer noopener"><svg class="lucide lucide-github" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg><span>GitHub</span></a>
+            </nav>
+            <span class="app-footer-mtonga" title="Made in Tonga"><span>MTONGA</span><span class="footer-flag" aria-hidden="true"></span></span>
+        </div>
     </footer>
 
-    <script src="js/i18n.js"></script>
-    <script src="https://unpkg.com/@tonconnect/ui@2/dist/tonconnect-ui.min.js"></script>
-    <script src="js/contract.js"></script>
-    <script src="js/add.js"></script>
+    <script type="module" src="__ENTRY_add-bag__"></script>
 </body>
 </html>

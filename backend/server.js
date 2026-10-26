@@ -1,124 +1,104 @@
+import './env.js'; // MUST stay first — loads .env before db.js / contract-sync.js read process.env
 import express from 'express';
 import cors from 'cors';
+import { timingSafeEqual } from 'node:crypto';
+import { pathToFileURL } from 'node:url';
+import { listCatalog, legacyBag } from './catalog.js';
+import { prepareV3 } from './v3/publications.js';
+import { V3Error } from './v3/errors.js';
+import { getApiConfig, getApiPublication, getApiBagInfo, getApiReceipt } from './api.js';
+import { enqueueJob, workerHealth, waitForJob } from './jobs.js';
 import db from './db.js';
-import { startSyncLoop, syncFromContract } from './contract-sync.js';
+import {
+    formatSize,
+    normalizeSizeBytes,
+    getCachedBagSummary,
+    TonStorageUnavailableError
+} from './storage.js';
+import {
+    RegistrationAttemptError,
+    cancelRegistrationAttempt,
+    getRegistrationAttempt,
+    getRegistrationHealth,
+    markRegistrationUnknown,
+    submitRegistrationBoc
+} from './registration-attempts.js';
 
-const app = express();
-app.use(cors());
-app.use(express.json());
+export const app = express();
+// The public service is reached through a reverse proxy on loopback. Trust
+// only that local hop so req.ip is per-client without accepting spoofed XFF
+// headers from arbitrary direct peers.
+app.set('trust proxy', 'loopback');
 
-const TON_STORAGE_API = 'http://127.0.0.1:9090/api/v1';
+// CORS from CORS_ORIGIN (comma-separated). '*' = allow all (wildcard),
+// a list of origins = restrict to those, empty/unset = same-origin only.
+// NOTE: .env currently ships '*' (allow all). Set it to your real origin
+// (e.g. tonsite://piracy.ton) to actually restrict cross-origin access.
+const corsOrigins = (process.env.CORS_ORIGIN || '')
+    .split(',')
+    .map(s => s.trim())
+    .filter(Boolean);
+const corsOrigin = corsOrigins.includes('*')
+    ? '*'
+    : (corsOrigins.length ? corsOrigins : false);
+app.use(cors({ origin: corsOrigin }));
+app.use(express.json({ limit: '128kb' }));
+app.use('/api', rateLimit({ limit: 300, windowMs: 60000 }));
 
-// Fetch bag info from TON Storage
-async function getBagInfo(bagId, includeFiles = false) {
-    try {
-        const res = await fetch(`${TON_STORAGE_API}/details?bag_id=${bagId}`);
-        if (res.ok) {
-            const data = await res.json();
-            const info = {
-                description: data.description || null,
-                size: data.size || data.bag_size || null,
-                bag_size: data.bag_size || data.size || null,
-                files_count: data.files_count || 0,
-                peers_count: data.peers ? data.peers.length : 0,
-                piece_size: data.piece_size || 131072,
-                merkle_hash: data.merkle_hash || null,
-                dir_name: data.dir_name || ''
-            };
-            if (includeFiles && data.files) {
-                info.files = data.files;
-            }
-            return info;
-        }
-    } catch (err) {
-        console.log('Could not fetch bag info from TON Storage');
-    }
-    return null;
+// Constant-time comparison of the x-sync-secret header against SYNC_SECRET.
+function isSyncAuthorized(req) {
+    const secret = process.env.SYNC_SECRET;
+    if (!secret) return false;
+    const provided = Buffer.from(req.get('x-sync-secret') || '');
+    const expected = Buffer.from(secret);
+    return provided.length === expected.length && timingSafeEqual(provided, expected);
 }
 
-// Format bytes to human readable
-function formatSize(bytes) {
-    if (!bytes) return null;
-    const units = ['B', 'KB', 'MB', 'GB', 'TB'];
-    let i = 0;
-    while (bytes >= 1024 && i < units.length - 1) {
-        bytes /= 1024;
-        i++;
-    }
-    return bytes.toFixed(bytes >= 10 ? 0 : 1) + ' ' + units[i];
-}
-
-// GET /api/bags - Liste tous les bags
 app.get('/api/bags', (req, res) => {
-    const { category, q, page = 1, limit = 50 } = req.query;
-    const offset = (page - 1) * limit;
-
-    let sql = 'SELECT * FROM bags';
-    let countSql = 'SELECT COUNT(*) as total FROM bags';
-    const params = [];
-    const conditions = [];
-
-    if (category) {
-        conditions.push('category = ?');
-        params.push(category);
-    }
-
-    if (q) {
-        conditions.push('name LIKE ?');
-        params.push(`%${q}%`);
-    }
-
-    if (conditions.length > 0) {
-        const where = ' WHERE ' + conditions.join(' AND ');
-        sql += where;
-        countSql += where;
-    }
-
-    sql += ' ORDER BY created_at DESC LIMIT ? OFFSET ?';
-
-    const bags = db.prepare(sql).all(...params, limit, offset);
-    const { total } = db.prepare(countSql).get(...params);
-
-    res.json({ bags, total, page: Number(page) });
+    const page = Math.min(Math.max(parseInt(req.query.page, 10) || 1, 1), 1000000);
+    const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 50, 1), 100);
+    try {
+        const result = listCatalog({ version: req.query.version || 'all', category: req.query.category, q: req.query.q, page, limit });
+        for (const bag of result.bags) bag.peers_count = getCachedBagSummary(bag.bag_id)?.peers_count ?? null;
+        res.json(result);
+    } catch { res.status(400).json({ code: 'invalid_catalog_query' }); }
 });
-
-// GET /api/bags/:id - Détails d'un bag (par id ou bag_id)
 app.get('/api/bags/:id', (req, res) => {
-    const { id } = req.params;
-    // Check if it's a bag_id (64 hex chars) or numeric id
-    const isBagId = /^[a-fA-F0-9]{64}$/.test(id);
-    const bag = isBagId
-        ? db.prepare('SELECT * FROM bags WHERE bag_id = ?').get(id)
-        : db.prepare('SELECT * FROM bags WHERE id = ?').get(id);
-    if (!bag) {
-        return res.status(404).json({ error: 'Bag not found' });
-    }
-    res.json(bag);
+    const row = legacyBag(req.params.id);
+    return row ? res.json(row) : res.status(404).json({ error: 'Bag not found' });
 });
 
-// GET /api/bag-info/:bagId - Récupère les infos d'un bag depuis TON Storage
-// Returns all metadata needed for contract registration
-app.get('/api/bag-info/:bagId', async (req, res) => {
+app.get('/api/bag-info/:bagId', async (req, res, next) => {
     const { bagId } = req.params;
 
     if (!/^[a-fA-F0-9]{64}$/.test(bagId)) {
         return res.status(400).json({ error: 'Invalid bag_id format' });
     }
 
-    const info = await getBagInfo(bagId, true);
+    const normalizedBagId = bagId.toLowerCase();
+    const includeFiles = req.query.include_files !== '0';
+    let info;
+    try {
+        info = await getApiBagInfo(normalizedBagId, includeFiles);
+    } catch (error) {
+        if (error instanceof TonStorageUnavailableError) {
+            return res.status(503).json({ error: 'TON Storage unavailable', code: 'storage_unavailable' });
+        }
+        return next(error);
+    }
     if (!info) {
         return res.status(404).json({ error: 'Bag not found in TON Storage' });
     }
 
     res.json({
-        // Display info
+        bag_id: normalizedBagId,
+        metadata_updated_at: info.metadata_updated_at,
         description: info.description,
         size: formatSize(info.size),
-        size_bytes: info.size,
+        size_bytes: normalizeSizeBytes(info.size),
         files_count: info.files_count,
         peers_count: info.peers_count,
-        files: info.files || [],
-        // Contract metadata
+        files: includeFiles ? (info.files || []) : undefined,
         bag_size: info.bag_size,
         piece_size: info.piece_size,
         merkle_hash: info.merkle_hash,
@@ -126,15 +106,164 @@ app.get('/api/bag-info/:bagId', async (req, res) => {
     });
 });
 
-// GET /api/sync - Trigger manual sync from contract
-app.get('/api/sync', async (req, res) => {
-    const result = await syncFromContract();
-    res.json(result);
+function rateLimit({ limit, windowMs }) {
+    const buckets = new Map();
+    return (req, res, next) => {
+        const now = Date.now();
+        const key = req.ip || req.socket.remoteAddress || 'unknown';
+        let bucket = buckets.get(key);
+        if (!bucket || bucket.resetAt <= now) {
+            bucket = { count: 0, resetAt: now + windowMs };
+            buckets.set(key, bucket);
+        }
+        bucket.count += 1;
+        if (bucket.count > limit) {
+            res.set('Retry-After', String(Math.max(1, Math.ceil((bucket.resetAt - now) / 1000))));
+            return res.status(429).json({ error: 'rate_limited', code: 'rate_limited' });
+        }
+        if (buckets.size > 1000) {
+            for (const [candidate, value] of buckets) {
+                if (value.resetAt <= now) buckets.delete(candidate);
+            }
+        }
+        next();
+    };
+}
+
+const registrationReadLimit = rateLimit({ limit: 120, windowMs: 60_000 });
+const registrationWriteLimit = rateLimit({ limit: 20, windowMs: 60_000 });
+
+function disableCaching(_req, res, next) {
+    // The public reverse proxy caches other GET APIs. Registration state is
+    // mutable and must always reach this process or a wallet can remain stuck
+    // on an obsolete BROADCAST/CONFIRMING response.
+    res.set({
+        'Cache-Control': 'private, no-store, max-age=0',
+        'CDN-Cache-Control': 'no-store',
+        'Surrogate-Control': 'no-store',
+        Pragma: 'no-cache',
+        Expires: '0'
+    });
+    next();
+}
+
+function sendRegistrationError(res, error) {
+    if (error instanceof RegistrationAttemptError) {
+        return res.status(error.status).json({ error: error.code, code: error.code });
+    }
+    console.error('[tonconnect] Registration API failed:', error);
+    return res.status(500).json({ error: 'internal_error', code: 'internal_error' });
+}
+
+app.use('/api/registration-attempts', disableCaching);
+app.use('/api/health/tonconnect', disableCaching);
+
+app.post('/api/registration-attempts', registrationWriteLimit, (_req, res) => {
+    res.status(409).json({ code: 'v2_read_only', error: 'v2_read_only' });
+});
+
+app.get('/api/registration-attempts/:id', registrationReadLimit, (req, res) => {
+    const attempt = getRegistrationAttempt(req.params.id);
+    if (!attempt) return res.status(404).json({ error: 'attempt_not_found', code: 'attempt_not_found' });
+    res.json(attempt);
+});
+
+app.post('/api/registration-attempts/:id/submission', registrationWriteLimit, (req, res) => {
+    try {
+        res.json(submitRegistrationBoc(req.params.id, req.body?.boc));
+    } catch (error) {
+        sendRegistrationError(res, error);
+    }
+});
+
+app.post('/api/registration-attempts/:id/unknown', registrationWriteLimit, (req, res) => {
+    try {
+        res.json(markRegistrationUnknown(req.params.id));
+    } catch (error) {
+        sendRegistrationError(res, error);
+    }
+});
+
+app.post('/api/registration-attempts/:id/cancel', registrationWriteLimit, (req, res) => {
+    try {
+        res.json(cancelRegistrationAttempt(req.params.id));
+    } catch (error) {
+        sendRegistrationError(res, error);
+    }
+});
+
+app.use('/api/v3', disableCaching);
+app.get('/api/v3/config', registrationReadLimit, async (_req, res) => res.json(getApiConfig()));
+app.post('/api/v3/prepare', registrationWriteLimit, async (req, res) => {
+    try { res.json(await prepareV3(req.body || {})); }
+    catch (error) { res.status(error instanceof V3Error ? error.status : 503).json({ code: error.code || 'chain_unavailable' }); }
+});
+app.post('/api/v3/transaction', registrationWriteLimit, async (req, res) => {
+    try { res.json(getApiReceipt(req.body || {})); }
+    catch (error) { res.status(error instanceof V3Error ? error.status : 503).json({ code: error.code || 'chain_unavailable' }); }
+});
+app.get('/api/v3/publications/:address', registrationReadLimit, async (req, res) => {
+    try {
+        const publication = await getApiPublication(req.params.address);
+        publication ? res.json(publication) : res.status(404).json({ code: 'publication_not_found' });
+    } catch (error) {
+        const status = error instanceof V3Error ? error.status : 503;
+        if (status === 503) res.set('Retry-After', '2');
+        res.status(status).json({ code: error.code || 'chain_unavailable' });
+    }
+});
+
+app.get('/api/health/tonconnect', (_req, res) => {
+    res.json(getRegistrationHealth());
+});
+
+app.post('/api/sync', async (req, res, next) => {
+    if (!isSyncAuthorized(req)) {
+        return res.status(401).json({ error: 'Unauthorized' });
+    }
+    try {
+        enqueueJob.immediate('periodic:index-v2', 'index-v2', {}, { priority: 10 });
+        const result = await waitForJob('periodic:index-v2', 10000);
+        res.json({ synced: result?.synced ?? 0, total: result?.total ?? db.prepare('SELECT COUNT(*) n FROM bags').get().n });
+    } catch (error) { next(error); }
+});
+
+app.use('/api/health', disableCaching);
+app.get('/api/health/live', (_req, res) => res.json({ status: 'ok' }));
+app.get('/api/health/worker', (_req, res) => {
+    const health = workerHealth();
+    res.status(health.healthy && !health.degraded ? 200 : 503).json(health);
+});
+app.get('/api/health/ready', (_req, res) => {
+    try { db.prepare('SELECT 1').get(); res.json({ status: 'ready' }); }
+    catch { res.status(503).json({ status: 'unavailable' }); }
+});
+
+app.use((error, _req, res, next) => {
+    if (res.headersSent) return next(error);
+    if (error?.type === 'entity.too.large') {
+        return res.status(413).json({ error: 'request_too_large', code: 'request_too_large' });
+    }
+    if (error?.type === 'entity.parse.failed') {
+        return res.status(400).json({ error: 'invalid_json', code: 'invalid_json' });
+    }
+    if (['queue_full', 'rpc_busy', 'worker_pending', 'dependency_unavailable'].includes(error.message)) return res.status(503).json({ code: 'service_busy' });
+    console.error('[http] Unhandled request error:', error?.message || error);
+    return res.status(500).json({ error: 'internal_error', code: 'internal_error' });
 });
 
 const PORT = process.env.PORT || 3005;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-    // Start contract sync loop (every 60 seconds)
-    startSyncLoop(60000);
-});
+export function startServer(port = PORT) {
+    const server = app.listen(port, '127.0.0.1', () => {
+        console.log(JSON.stringify({ event: 'api_listening', port: server.address().port }));
+    });
+    return server;
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+    const server = startServer();
+    for (const signal of ['SIGTERM', 'SIGINT']) process.once(signal, () => {
+        const deadline = setTimeout(() => process.exit(1), 12000); deadline.unref();
+        server.close(() => { db.close(); process.exit(0); });
+    });
+}

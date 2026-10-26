@@ -1,0 +1,18 @@
+{
+  "css": "279449ccc0f3c5d1b518c6929591246b3e66c6cf827bd88d2e08127c45b0f5ec",
+  "markup": {
+    "index.html": "b37fff7f847796971f7e0271c5a3f1b911fb9f4a4afc54af63e682c20b8741f1",
+    "add.html": "1d48f3af6b616f991eac2d31ac7a5e7e9b445aefb70d598023395c0f284e019a",
+    "bag.html": "f29d26b71fe4d0f4c6ee4b936e5024e2fffc2e7b6b197b7effa4f3396d634100",
+    "faq.html": "7b38149f0508058aeb57e0c169e449aad7e927b30e000fc289ecb515b7aba64e"
+  },
+  "public": {
+    "piracy.png": "023be6e7f119086cf615076b03d3cbbd6870edf73a0e1938fef7d2317e6667ac",
+    "favicon.png": "023be6e7f119086cf615076b03d3cbbd6870edf73a0e1938fef7d2317e6667ac",
+    "tonconnect-manifest.json": "31441ade2b08bf6d36064c075f49a72e6766e06bd70a461321ab6638dcaf5fb1",
+    "js/lottie_light.min.js": "9588432bec30c8ef8200bac4a67d8aaad881047bc2a6c9fa624d90ec96402410",
+    "assets/icons/ton.svg": "d904f120eadc2dd7057de3dec754efe77980ff361790bfb90662844efb12fb4f",
+    "assets/icons/telegram.svg": "37a0dca86bde0c0d09c22c58eaa2fb8b74a312003b635bf048323e53b5b13a67",
+    "assets/animations/mtonga.json": "ca23381585d2d142b1e77bb2c6eb9832fd911075efa227e00e3fca281123ac3d"
+  }
+}

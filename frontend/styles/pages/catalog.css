@@ -1,0 +1,253 @@
+
+.hero {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.hero-img {
+    height: 120px;
+    width: auto;
+    filter: var(--logo-shadow);
+}
+
+[data-theme="dark"] .hero-img {
+    filter: none;
+}
+
+.hero-title {
+    margin-top: 16px;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+
+.search-box {
+    margin-bottom: 16px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.search-box input {
+    padding: 12px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: var(--radius-full);
+    background: var(--bg-white);
+    color: var(--text-primary);
+    width: 100%;
+    max-width: 400px;
+    box-shadow: var(--shadow-sm);
+}
+
+.search-box input::placeholder {
+    color: var(--text-secondary);
+}
+
+.search-box input:focus {
+    outline: 2px solid var(--ton-blue);
+}
+
+.search-box button {
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    background: var(--ton-blue);
+    color: var(--text-on-accent);
+    border: none;
+    border-radius: var(--radius-full);
+}
+
+.search-box button:hover {
+    background: var(--ton-blue-hover);
+}
+
+.categories {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 4px 4px 12px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.categories::-webkit-scrollbar {
+    display: none;
+}
+
+.categories-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px;
+    border-radius: 296px;
+    background: var(--pill-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+[data-theme="dark"] .categories-pill {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.categories label {
+    flex-shrink: 0;
+    height: 35px;
+    padding: 0 18px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 510;
+    line-height: 18px;
+    letter-spacing: -0.08px;
+    color: var(--text-primary);
+    background: transparent;
+    transition: background-color 0.15s ease;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
+}
+
+/* Visually hidden but still focusable/keyboard-navigable (was display:none,
+   which removed the radios from the tab order). */
+.categories input[type="radio"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.categories label:has(input:focus-visible) {
+    outline: 2px solid var(--ton-blue);
+    outline-offset: 2px;
+}
+
+.categories label:has(input:checked) {
+    background: var(--pill-active-bg);
+}
+
+.catalog-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.catalog-pagination[hidden] {
+    display: none;
+}
+
+.catalog-pagination button {
+    padding: 8px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--bg-white);
+    color: var(--text-primary);
+    font: inherit;
+    cursor: pointer;
+}
+
+.catalog-pagination button:hover:not(:disabled) {
+    background: var(--hover-bg);
+}
+
+.catalog-pagination button:focus-visible {
+    outline: 2px solid var(--ton-blue);
+    outline-offset: 2px;
+}
+
+.catalog-pagination button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.table-wrapper {
+    background: var(--bg-white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: left;
+    padding: 12px 8px;
+}
+
+th {
+    background: var(--bg-white);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+#bags-table th {
+    text-align: center;
+}
+
+#bags-table th:nth-child(-n+2) {
+    text-align: left;
+}
+
+#bags-table th:last-child {
+    text-align: left;
+}
+
+td {
+    border-bottom: 1px solid var(--border-color);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr.clickable-row {
+    cursor: pointer;
+}
+
+tr.clickable-row:hover td {
+    background: var(--hover-bg);
+}
+
+.type-svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--text-secondary);
+}
+
+.bag-name {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.bag-id {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.bag-id:hover {
+    color: var(--ton-blue);
+}

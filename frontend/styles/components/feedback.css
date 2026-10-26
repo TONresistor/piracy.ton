@@ -1,0 +1,62 @@
+
+.loading, .no-files {
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 20px;
+}
+
+.table-empty {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 40px;
+}
+
+.skeleton-row {
+    pointer-events: none;
+}
+
+.skeleton {
+    display: block;
+    height: 12px;
+    border-radius: var(--radius-full);
+    background: var(--bg-secondary);
+    animation: skeleton-pulse 1.2s ease-in-out infinite;
+}
+
+.skeleton-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.skeleton-name {
+    width: min(180px, 85%);
+}
+
+.skeleton-value {
+    width: 56px;
+}
+
+.skeleton-count {
+    width: 28px;
+}
+
+.skeleton-date {
+    width: 72px;
+}
+
+.skeleton-id {
+    width: min(150px, 90%);
+}
+
+@keyframes skeleton-pulse {
+    50% {
+        opacity: 0.45;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .skeleton {
+        animation: none;
+    }
+}

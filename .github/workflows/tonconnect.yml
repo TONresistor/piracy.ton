@@ -1,0 +1,66 @@
+name: ton-connect
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "backend/**"
+      - "shared/contract-sdk/**"
+      - "frontend/**"
+      - "contracts/v3/wrappers-ts/**"
+      - ".github/workflows/tonconnect.yml"
+  pull_request:
+    paths:
+      - "backend/**"
+      - "shared/contract-sdk/**"
+      - "frontend/**"
+      - "contracts/v3/wrappers-ts/**"
+      - ".github/workflows/tonconnect.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  frontend:
+    name: frontend build + tests + audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm ci --prefix ../shared/contract-sdk
+      - run: npm run check
+      - name: Assert generated TON bundles are committed
+        run: git diff --exit-code -- ../backend/v3-sdk.cjs
+      - run: npm audit --audit-level=high
+      - run: npm audit --prefix ../shared/contract-sdk --audit-level=high
+
+  backend:
+    name: backend checks + tests + audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - run: npm ci
+      - run: npm ci --prefix ../shared/contract-sdk
+      - run: npm run build --prefix ../shared/contract-sdk
+      - name: Assert backend SDK matches shared sources
+        run: git diff --exit-code -- v3-sdk.cjs
+      - run: npm run check
+      - run: npm audit --audit-level=high

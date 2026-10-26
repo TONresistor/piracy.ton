@@ -1,28 +1,17 @@
 import Database from 'better-sqlite3';
+import { migrateDatabase } from './migrations.js';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 
-const db = new Database('piracy.db');
+// Keep mutable runtime state outside the deployed source tree in production.
+// The local fallback preserves the existing zero-config development behavior.
+const dbPath = process.env.DB_PATH || join(dirname(fileURLToPath(import.meta.url)), 'piracy.db');
+const db = new Database(dbPath);
+db.pragma('journal_mode = WAL');
+db.pragma('synchronous = NORMAL');
+db.pragma('busy_timeout = 5000');
 
-db.exec(`
-    CREATE TABLE IF NOT EXISTS bags (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        bag_id TEXT UNIQUE NOT NULL,
-        name TEXT NOT NULL,
-        category TEXT NOT NULL,
-        size TEXT,
-        files_count INTEGER,
-        peers_count INTEGER,
-        uploader_wallet TEXT NOT NULL,
-        tx_boc TEXT,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    )
-`);
-
-// Add columns if they don't exist (migration)
-try { db.exec(`ALTER TABLE bags ADD COLUMN files_count INTEGER`); } catch {}
-try { db.exec(`ALTER TABLE bags ADD COLUMN peers_count INTEGER`); } catch {}
-try { db.exec(`ALTER TABLE bags ADD COLUMN contract_index INTEGER`); } catch {}
-
-db.exec(`CREATE INDEX IF NOT EXISTS idx_bags_name ON bags(name)`);
-db.exec(`CREATE INDEX IF NOT EXISTS idx_bags_category ON bags(category)`);
+try { migrateDatabase(db); }
+catch (error) { db.close(); throw error; }
 
 export default db;

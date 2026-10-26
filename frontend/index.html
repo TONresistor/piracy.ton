@@ -11,13 +11,14 @@
     <meta property="og:image" content="/piracy.png">
     <meta property="og:type" content="website">
     <link rel="icon" type="image/png" href="/favicon.png">
-    <link rel="stylesheet" href="css/style.css?v=2">
+    <link rel="stylesheet" href="__STYLE__">
+    <script>(function(){try{var s=localStorage.getItem("theme");if(s==="dark"||(!s&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.setAttribute("data-theme","dark");}catch(e){}})();</script>
 </head>
 <body>
     <header>
         <a href="/" class="logo"><img src="/piracy.png" alt="piracy" class="logo-img">piracy.ton</a>
         <div class="header-right">
-            <button class="theme-toggle" id="theme-toggle" title="Toggle dark mode">
+            <button class="theme-toggle" id="theme-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">
                 <svg id="icon-moon" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
                 <svg id="icon-sun" style="display:none" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 0 0 0-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/></svg>
             </button>
@@ -36,13 +37,15 @@
         </div>
 
         <div class="categories">
-            <label><input type="radio" name="cat" value="" checked> <span data-i18n="cat_all">All</span></label>
-            <label><input type="radio" name="cat" value="video"><svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m10 8 6 4-6 4Z"/></svg><span data-i18n="cat_video">Video</span></label>
-            <label><input type="radio" name="cat" value="audio"><svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg><span data-i18n="cat_audio">Audio</span></label>
-            <label><input type="radio" name="cat" value="apps"><svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M8 6h.01M12 6h.01M8 12h8"/></svg><span data-i18n="cat_apps">Apps</span></label>
-            <label><input type="radio" name="cat" value="games"><svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg><span data-i18n="cat_games">Games</span></label>
-            <label><input type="radio" name="cat" value="books"><svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg><span data-i18n="cat_books">Books</span></label>
-            <label><input type="radio" name="cat" value="other"><svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg><span data-i18n="cat_other">Other</span></label>
+            <div class="categories-pill">
+                <label><input type="radio" name="cat" value="" checked><span data-i18n="cat_all">All</span></label>
+                <label><input type="radio" name="cat" value="video"><span data-i18n="cat_video">Video</span></label>
+                <label><input type="radio" name="cat" value="audio"><span data-i18n="cat_audio">Audio</span></label>
+                <label><input type="radio" name="cat" value="apps"><span data-i18n="cat_apps">Apps</span></label>
+                <label><input type="radio" name="cat" value="games"><span data-i18n="cat_games">Games</span></label>
+                <label><input type="radio" name="cat" value="books"><span data-i18n="cat_books">Books</span></label>
+                <label><input type="radio" name="cat" value="other"><span data-i18n="cat_other">Other</span></label>
+            </div>
         </div>
 
         <div class="table-wrapper">
@@ -62,14 +65,26 @@
                 </tbody>
             </table>
         </div>
+        <nav class="catalog-pagination" id="catalog-pagination" aria-label="Pagination" hidden>
+            <button type="button" id="previous-page" data-i18n="pagination_previous" disabled>Previous</button>
+            <span id="page-status" aria-live="polite"></span>
+            <button type="button" id="next-page" data-i18n="pagination_next" disabled>Next</button>
+        </nav>
     </main>
 
-    <footer>
-        <a href="https://t.me/TONpiracy" target="_blank">@TONpiracy</a>
-        <a href="/faq.html">F.A.Q</a>
+    <footer class="app-footer">
+        <div class="app-footer-inner">
+            <a class="app-footer-ton" href="https://ton.org" target="_blank" rel="noreferrer noopener" aria-label="The Open Network">
+                <img src="/assets/icons/ton.svg?v=2" alt="TON">
+            </a>
+            <nav class="app-footer-links" aria-label="Project links">
+                <a href="https://t.me/TONpiracy" target="_blank" rel="noreferrer noopener"><span class="app-footer-telegram-icon" aria-hidden="true"></span><span>Telegram</span></a>
+                <a href="https://github.com/TONresistor/piracy.ton" target="_blank" rel="noreferrer noopener"><svg class="lucide lucide-github" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg><span>GitHub</span></a>
+            </nav>
+            <span class="app-footer-mtonga" title="Made in Tonga"><span>MTONGA</span><span class="footer-flag" aria-hidden="true"></span></span>
+        </div>
     </footer>
 
-    <script src="js/i18n.js"></script>
-    <script src="js/app.js"></script>
+    <script type="module" src="__ENTRY_catalog__"></script>
 </body>
 </html>

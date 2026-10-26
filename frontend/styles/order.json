@@ -1,0 +1,12 @@
+[
+  "tokens.css",
+  "base.css",
+  "components/navigation.css",
+  "pages/catalog.css",
+  "components/footer.css",
+  "pages/add-bag.css",
+  "pages/bag-detail.css",
+  "components/feedback.css",
+  "pages/faq.css",
+  "layout.css"
+]
